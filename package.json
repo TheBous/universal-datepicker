@@ -15,7 +15,8 @@
     "commit": "npx git-cz",
     "pack": "npm pack",
     "link": "npm link",
-    "release": "npm run build && npx np"
+    "changelog": "standard-version",
+    "release": "npm run build && npm run changelog && npx np"
   },
   "husky": {
     "hooks": {
@@ -70,7 +71,8 @@
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-terser": "^5.3.0",
-    "rollup-plugin-visualizer": "^4.0.4"
+    "rollup-plugin-visualizer": "^4.0.4",
+    "standard-version": "^7.1.0"
   },
   "dependencies": {}
 }
