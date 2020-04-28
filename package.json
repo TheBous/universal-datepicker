@@ -38,6 +38,10 @@
     "datepicker",
     "calendar",
     "lightweight",
+    "universal-calendar",
+    "react-datepicker",
+    "angular-datepicker",
+    "vue-datepicker",
     "vanilla-javascript"
   ],
   "bugs": {
