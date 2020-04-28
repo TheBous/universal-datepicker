@@ -19,7 +19,7 @@ export default {
     {
       file: "./build/bundle.umd.js",
       format: "umd",
-      name: "universal-datepicker",
+      name: "universal-datepicker.umd",
     },
     {
       file: "./build/bundle.cjs.js",
@@ -28,6 +28,7 @@ export default {
     {
       file: "./build/bundle.iife.js",
       format: "iife",
+      name: "universal-datepicker.iife",
     },
     {
       file: "./build/bundle.es.js",
