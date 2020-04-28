@@ -10,52 +10,65 @@
   </p>
 </p>
 
-
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Configurable options](#configurable-options)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
-
-
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Configurable options](#configurable-options)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Lightweight datepicker component for your projects. It's fully compatible with any frameworks/libraries (React, Vue, Angular, ecc...). 
-Light fast and customizable 
+Lightweight datepicker component for your projects. It's fully compatible with any frameworks/libraries (React, Vue, Angular, ecc...).
+Light fast and customizable. Partially inspired by airbnb/react-dates.
 
 ### Built With
-This library does not have any dependencies. It's fully and totally pure vanilla javascript. We only used devDependencies to write modern code, beautify and bundle it: 
-* [babel](https://babeljs.io/)
-* [rollup](https://rollupjs.org/)
-* [eslint](https://eslint.org/)
-* [prettier](https://prettier.io/)
 
+This library does not have any dependencies. It's fully and totally pure vanilla javascript. We only used devDependencies to write modern code, beautify and bundle it:
 
+- [babel](https://babeljs.io/)
+- [rollup](https://rollupjs.org/)
+- [eslint](https://eslint.org/)
+- [prettier](https://prettier.io/)
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
+2. Clone the repo
+
+```sh
+git clone https://github.com/TheBous/universal-datepicker.git
+```
+
+3. Install NPM packages
+
+```sh
+yarn
+```
+
+4. Enter your API in `config.js`
+
+```sh
+yarn start
+```
+
 ### Configurable options
 
 1. **_`DOMElement`_**: DOM element to which the calendar should be attached (es. body, #app)
 
-2. **_`today`_**: Pass today from the parent application, so calendar can avoid to adapt itself to internalization and/or timezones. 
+2. **_`today`_**: Pass today from the parent application, so calendar can avoid to adapt itself to internalization and/or timezones.
 
 3. **_`initialDate`_**: selected date to fit calendar to the right month/year on the splash screen
 
@@ -73,42 +86,32 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
-2. Clone the repo
-```sh
-git clone https://github.com/TheBous/universal-datepicker.git
-```
-3. Install NPM packages
-```sh
-yarn
-```
-4. Enter your API in `config.js`
-```sh
-yarn start
-```
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-In your project, you can use this datepicker library initializing the class :
+1. Install NPM packages
 
 ```sh
-const calendar = new CalendarInitiator({pass here all configurable options you want})
+yarn add universal-datepicker
 ```
 
+2. Add this line when you want to show calendar
 
+```sh
+const calendar = new UniversalCalendar({configs here})
+```
 
+3. Add this line when you want to show calendar
+   Add a DOM element in your own project. Coincides with the DOMElement configuration
+
+4. Add custom css hooking to existing classes
 
 <!-- CONTACT -->
+
 ## Contact
 
-TheBous - [@your_twitter](https://twitter.com/The_Bous1993) - thebous1993@gmail.com
-
-
+TheBous - [@the_bous](https://twitter.com/The_Bous1993) - thebous1993@gmail.com
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
 [contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
