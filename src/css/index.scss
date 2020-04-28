@@ -1,0 +1,63 @@
+#calendar {
+  width: 20em;
+  height: 20em;
+}
+
+.calendar__wrapper {}
+
+.calendar__wrapper--horizontal {
+  display: flex;
+}
+
+.calendar__wrapper--vertical {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.calendar__weekday {
+  margin-right: 3px;
+}
+
+.calendar__header {
+  display: flex;
+}
+
+.calendar__arrow-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar__arrow {
+  &--left {
+    cursor: pointer;
+  }
+
+  &--right {
+    cursor: pointer;
+  }
+}
+
+.calendar__cell {
+  cursor: pointer;
+}
+
+.cell--past {
+  cursor: default;
+  text-decoration: line-through;
+}
+
+.cell--checkin {
+  background: yellow;
+}
+
+.cell--checkout {
+  background: blueviolet;
+}
+
+.cell--range {
+  background: salmon;
+}
+
+.cell--today {
+  border: 1px solid black;
+}

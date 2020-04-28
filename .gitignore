@@ -1,0 +1,9 @@
+node_modules/**
+build/*.js
+build/*.css
+package-lock.json
+.vscode
+.idea
+.DS_Store
+stats.html
+*.tgz
