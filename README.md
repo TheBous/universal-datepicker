@@ -57,7 +57,7 @@ git clone https://github.com/TheBous/universal-datepicker.git
 yarn
 ```
 
-4. Enter your API in `config.js`
+4. Start your locally application
 
 ```sh
 yarn start
