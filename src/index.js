@@ -9,10 +9,13 @@ class CalendarInitiator {
   #initialDate;
   #weekdaysLabels;
   #monthsLabels;
-  #defaultDates;
+  #checkin;
+  #checkout;
   #orientation;
   #horizontalPages;
   #verticalPages;
+  #onCheckinChange;
+  #onCheckoutChange;
 
   constructor({
     // DOM element to which the calendar should be attached
@@ -26,16 +29,17 @@ class CalendarInitiator {
     // Array of months label in current language
     monthsLabels = letterMonths,
     // checkin,checkout in javascript date format
-    defaultDates: {
-      checkin = new Date(2020, 5, 5),
-      checkout = new Date(2020, 5, 8),
-    } = {},
+    checkin = new Date(2020, 4, 5),
+    checkout = new Date(2020, 4, 8),
     // calendar orientation : vertical with scroll or horizontal with arrows (horizontal|vertical)
     orientation = "horizontal",
     // number of calendar page per view in horizontal view
     horizontalPages = 2,
     // number of calendar page per view in vertical view
     verticalPages = 10,
+    onCheckinChange = (checkin) => console.info("On checkin change", checkin),
+    onCheckoutChange = (checkout) =>
+      console.info("On checkout change", checkout),
   } = {}) {
     this.DOMElement = DOMElement;
     this.today = today;
@@ -47,6 +51,8 @@ class CalendarInitiator {
     this.orientation = orientation;
     this.horizontalPages = horizontalPages;
     this.verticalPages = verticalPages;
+    this.onCheckinChange = onCheckinChange;
+    this.onCheckoutChange = onCheckoutChange;
 
     this.renderCalendar({
       DOMElement: this.DOMElement,
@@ -59,6 +65,8 @@ class CalendarInitiator {
       orientation: this.orientation,
       horizontalPages: this.horizontalPages,
       verticalPages: this.verticalPages,
+      onCheckinChange: this.onCheckinChange,
+      onCheckoutChange: this.onCheckoutChange,
     });
   }
 
@@ -89,19 +97,22 @@ class CalendarInitiator {
     });
   };
 
+  // This month start from 0
   onCellClick = (event, year, month) => {
     const monthWithoutIndex = month + 1;
     const { textContent: day } = event.target;
+    console.error("father", day, month, year);
 
-    const selectedDate = new Date(year, monthWithoutIndex, day);
+    const selectedDate = new Date(year, month, day);
+    const formattedDate = `${day}/${monthWithoutIndex}/${year}`;
 
     if (selectedDate <= this.checkin) {
-      this.setCheckin(selectedDate);
+      this.setCheckin(selectedDate, formattedDate);
     } else if (differenceInDays(selectedDate, this.checkout) > 2) {
-      this.setCheckin(selectedDate);
-      this.setCheckout(null);
+      this.setCheckin(selectedDate, formattedDate);
+      this.setCheckout(null, null);
     } else if (selectedDate > this.checkin) {
-      this.setCheckout(selectedDate);
+      this.setCheckout(selectedDate, formattedDate);
     }
 
     this.removeCalendar();
@@ -109,12 +120,14 @@ class CalendarInitiator {
     this.renderCalendar({});
   };
 
-  setCheckin = (checkin) => {
+  setCheckin = (checkin, formattedCheckin) => {
     this.checkin = checkin;
+    if (!!formattedCheckin) this.onCheckinChange(formattedCheckin);
   };
 
-  setCheckout = (checkout) => {
+  setCheckout = (checkout, formattedCheckout) => {
     this.checkout = checkout;
+    if (!!formattedCheckout) this.onCheckoutChange(formattedCheckout);
   };
 
   renderCalendar = ({
@@ -138,24 +151,6 @@ class CalendarInitiator {
     const initialDay = initialDate.getDate();
     const initialMonth = initialDate.getMonth();
     const initialYear = initialDate.getFullYear();
-
-    // default dates informations
-    const defaultDates = {
-      checkin: checkin
-        ? {
-            day: checkin.getDate(),
-            month: checkin.getMonth(),
-            year: checkin.getFullYear(),
-          }
-        : {},
-      checkout: checkout
-        ? {
-            day: checkout.getDate(),
-            month: checkout.getMonth(),
-            year: checkout.getFullYear(),
-          }
-        : {},
-    };
 
     // calendar table builder [external DOM element]
     const calendarContainer = document.querySelector(DOMElement);
@@ -186,8 +181,8 @@ class CalendarInitiator {
         currentDayInMonth: currentDay,
         month: initialDate.getMonth(),
         year: initialDate.getFullYear(),
-        defaultCheckin: defaultDates.checkin,
-        defaultCheckout: defaultDates.checkout,
+        defaultCheckin: checkin,
+        defaultCheckout: checkout,
         today,
         weekdaysLabels,
         monthsLabels,

@@ -19,24 +19,31 @@ export const renderCellWeekdays = ({
   defaultCheckout,
   onCellClick,
 }) => {
+  // month in right orthodox index (1-12) to print month to UI
+  const UIMonth = month + 1;
   const firstDayOfMonthInWeek = getDayInWeek(month, year);
   const daysInMonth = getDaysInMonth(month, year);
   let renderedDay = 1;
 
-  container.appendChild(renderHeader(month, monthsLabels));
+  container.appendChild(renderHeader(month, monthsLabels, year));
 
   renderLetterWeekdays(weekdaysLabels, container);
 
-  const {
-    day: defaultCheckinDay,
-    month: defaultCheckinMonth,
-    year: defaultCheckinYear,
-  } = defaultCheckin;
-  const {
-    day: defaultCheckoutDay,
-    month: defaultCheckoutMonth,
-    year: defaultCheckoutYear,
-  } = defaultCheckout;
+  const unpackedCheckin = defaultCheckin
+    ? {
+        day: defaultCheckin.getDate(),
+        month: defaultCheckin.getMonth(),
+        year: defaultCheckin.getFullYear(),
+      }
+    : {};
+
+  const unpackedCheckout = defaultCheckout
+    ? {
+        day: defaultCheckout.getDate(),
+        month: defaultCheckout.getMonth(),
+        year: defaultCheckout.getFullYear(),
+      }
+    : {};
 
   for (let i = 0; i < 6; i++) {
     const row = document.createElement("tr");
@@ -57,35 +64,34 @@ export const renderCellWeekdays = ({
 
         cell.className = "calendar__cell";
         const checkin = new Date(
-          defaultCheckinYear,
-          defaultCheckinMonth,
-          defaultCheckinDay
+          unpackedCheckin.year,
+          unpackedCheckin.month,
+          unpackedCheckin.day
         );
         const checkout = new Date(
-          defaultCheckoutYear,
-          defaultCheckoutMonth,
-          defaultCheckoutDay
+          unpackedCheckout.year,
+          unpackedCheckout.month,
+          unpackedCheckout.day
         );
 
         // build a new js date with current cell(day)/month/year
-        const currentCellDate = new Date(year, month + 1, renderedDay);
+        const currentCellDate = new Date(year, month, renderedDay);
 
-        cell.setAttribute("data-date", `${year}-${month + 1}-${renderedDay}`);
-
+        cell.setAttribute("data-date", `${year}-${UIMonth}-${renderedDay}`);
         if (isBefore({ year, month, day: renderedDay }, today)) {
           cell.classList.add("cell--past");
         }
 
         if (
-          defaultCheckinDay === renderedDay &&
-          defaultCheckinMonth === month + 1 &&
-          defaultCheckinYear === year
+          unpackedCheckin.day === renderedDay &&
+          unpackedCheckin.month === month &&
+          unpackedCheckin.year === year
         ) {
           cell.classList.add("cell--checkin");
         } else if (
-          defaultCheckoutDay === renderedDay &&
-          defaultCheckoutMonth === month + 1 &&
-          defaultCheckoutYear === year
+          unpackedCheckout.day === renderedDay &&
+          unpackedCheckout.month === month &&
+          unpackedCheckout.year === year
         ) {
           cell.classList.add("cell--checkout");
         } else if (dateInRange(checkin, checkout, currentCellDate)) {
