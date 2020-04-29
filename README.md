@@ -83,6 +83,10 @@ yarn start
 
 9. **_`verticalPages`_**: number of calendar page per view in vertical view.
 
+10. **_`onCheckinChange`_**: (function) callback triggered with new checkin date (dd/mm/yyyy) .
+
+11. **_`onCheckoutChange`_**: (function) callback triggered with new checkout date (dd/mm/yyyy) .
+
 ### Installation
 
 ### `1: Install NPM packages`
