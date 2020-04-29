@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/TheBous">
-    <img src="https://imgur.com/OHwdF22" alt="Logo" width="80" height="80">
+    <img src="images/datepicker.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">Pure 8kb Vanilla Javascript plug and play datepicker</h3>
   <p align="center">
@@ -19,7 +19,6 @@
 - [Getting Started](#getting-started)
   - [Configurable options](#configurable-options)
   - [Installation](#installation)
-- [Usage](#usage)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
@@ -86,22 +85,40 @@ yarn start
 
 ### Installation
 
-1. Install NPM packages
+### `1: Install NPM packages`
 
 ```sh
 yarn add universal-datepicker
 ```
 
-2. Add this line when you want to show calendar
+### `2: Add this line when you want to show calendar`
 
 ```sh
 const calendar = new UniversalCalendar({configs here})
 ```
 
-3. Add this line when you want to show calendar
-   Add a DOM element in your own project. Coincides with the DOMElement configuration
+### `3: Add a DOM element in your own project. Coincides with the DOMElement configuration`
 
-4. Add custom css hooking to existing classes
+```sh
+<div id="calendar"></div>
+```
+
+### `4: Add custom css hooking to existing classes`
+
+- calendar\_\_wrapper--horizontal
+- calendar\_\_wrapper--vertical
+- calendar\_\_weekday
+- calendar\_\_header
+- calendar\_\_arrow-wrapper
+- calendar\_\_arrow
+- calendar\_\_arrow--left
+- calendar\_\_arrow--right
+- calendar\_\_cell
+- cell--past
+- cell--checkin
+- cell--checkout
+- cell--range
+- cell--today
 
 <!-- CONTACT -->
 
