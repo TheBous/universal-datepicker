@@ -16,7 +16,7 @@
     "pack": "npm pack",
     "link": "npm link",
     "changelog": "standard-version",
-    "release": "npm run build && npx np && npm run changelog"
+    "release": "npm run build && npx np"
   },
   "standard-version": {
     "skip": {
