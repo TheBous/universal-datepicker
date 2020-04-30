@@ -75,17 +75,19 @@ yarn start
 
 5. **_`monthsLabels`_**: Array of months label in current language
 
-6. **_`defaultDates`_**: checkin,checkout in javascript date format ({checkin: new Date(), checkout: new Date()}).
+6. **_`checkin`_**: checkin in javascript date format (checkin: new Date()).
 
-7. **_`orientation`_**: calendar orientation : vertical with scroll or horizontal with arrows (horizontal|vertical).
+7. **_`checkout`_**: checkout in javascript date format (checkout: new Date()).
 
-8. **_`horizontalPages`_**: number of calendar page per view in horizontal view.
+8. **_`orientation`_**: calendar orientation : vertical with scroll or horizontal with arrows (horizontal|vertical).
 
-9. **_`verticalPages`_**: number of calendar page per view in vertical view.
+9. **_`horizontalPages`_**: number of calendar page per view in horizontal view.
 
-10. **_`onCheckinChange`_**: (function) callback triggered with new checkin date (dd/mm/yyyy) .
+10. **_`verticalPages`_**: number of calendar page per view in vertical view.
 
-11. **_`onCheckoutChange`_**: (function) callback triggered with new checkout date (dd/mm/yyyy) .
+11. **_`onCheckinChange`_**: (function) callback triggered with new checkin date (dd/mm/yyyy) .
+
+12. **_`onCheckoutChange`_**: (function) callback triggered with new checkout date (dd/mm/yyyy) .
 
 ### Installation
 
