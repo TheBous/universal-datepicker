@@ -2,9 +2,6 @@ import { renderCellWeekdays } from "../builder/cell";
 
 export const renderCalendarBlocks = ({
   container,
-  currentDay,
-  currentMonth,
-  currentYear,
   currentDayInMonth,
   // no-index month
   month,
@@ -17,30 +14,30 @@ export const renderCalendarBlocks = ({
   onPrev,
   onNext,
   onCellClick,
-  orientation
+  orientation,
 }) => {
   const calendarTable = document.createElement("table");
 
-  if(orientation === 'horizontal'){
-    const arrowsContainer = document.createElement('div');
-    arrowsContainer.classList.add('calendar__arrow-wrapper');
+  if (orientation === "horizontal") {
+    const arrowsContainer = document.createElement("div");
+    arrowsContainer.classList.add("calendar__arrow-wrapper");
     calendarTable.appendChild(arrowsContainer);
 
-    const leftArrow = document.createElement('span');
+    const leftArrow = document.createElement("span");
     leftArrow.onclick = () => onPrev();
-    leftArrow.classList.add('calendar__arrow');
-    leftArrow.classList.add('calendar__arrow--left');
-    leftArrow.innerHTML = '<';
-  
-    const rightArrow = document.createElement('span');
+    leftArrow.classList.add("calendar__arrow");
+    leftArrow.classList.add("calendar__arrow--left");
+    leftArrow.innerHTML = "<";
+
+    const rightArrow = document.createElement("span");
     rightArrow.onclick = () => onNext();
-    rightArrow.classList.add('calendar__arrow');
-    rightArrow.classList.add('calendar__arrow--right');
-    rightArrow.innerHTML = '>';
-    
+    rightArrow.classList.add("calendar__arrow");
+    rightArrow.classList.add("calendar__arrow--right");
+    rightArrow.innerHTML = ">";
+
     arrowsContainer.appendChild(leftArrow);
     arrowsContainer.appendChild(rightArrow);
-  };
+  }
   // print cells
   renderCellWeekdays({
     container: calendarTable,
@@ -52,7 +49,7 @@ export const renderCalendarBlocks = ({
     today,
     defaultCheckin,
     defaultCheckout,
-    onCellClick
+    onCellClick,
   });
 
   container.appendChild(calendarTable);

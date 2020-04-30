@@ -37,7 +37,9 @@ class CalendarInitiator {
     horizontalPages = 2,
     // number of calendar page per view in vertical view
     verticalPages = 10,
+    // callback when select checkin field
     onCheckinChange = (checkin) => console.info("On checkin change", checkin),
+    // callback when select checkin field
     onCheckoutChange = (checkout) =>
       console.info("On checkout change", checkout),
   } = {}) {
@@ -101,7 +103,6 @@ class CalendarInitiator {
   onCellClick = (event, year, month) => {
     const monthWithoutIndex = month + 1;
     const { textContent: day } = event.target;
-    console.error("father", day, month, year);
 
     const selectedDate = new Date(year, month, day);
     const formattedDate = `${day}/${monthWithoutIndex}/${year}`;
@@ -116,7 +117,6 @@ class CalendarInitiator {
     }
 
     this.removeCalendar();
-
     this.renderCalendar({});
   };
 
@@ -158,6 +158,7 @@ class CalendarInitiator {
     // calendar table wrapper [internal DOM element]
     const calendarWrapper = document.createElement("div");
     calendarWrapper.id = "calendar__wrapper";
+    if (orientation === "horizontal") calendarWrapper.style.display = "flex";
     calendarWrapper.className = `calendar__wrapper ${
       orientation === "vertical"
         ? "calendar__wrapper--vertical"

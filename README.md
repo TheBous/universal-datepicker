@@ -111,6 +111,8 @@ const calendar = new UniversalCalendar({configs here})
 
 ### `4: Add custom css hooking to existing classes`
 
+In order to
+
 - calendar\_\_wrapper--horizontal
 - calendar\_\_wrapper--vertical
 - calendar\_\_weekday
