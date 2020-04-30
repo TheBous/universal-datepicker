@@ -41,32 +41,32 @@ class CalendarInitiator {
     onCheckoutChange = (checkout) =>
       console.info("On checkout change", checkout),
   } = {}) {
-    this.DOMElement = DOMElement;
-    this.today = today;
-    this.initialDate = initialDate;
-    this.weekdaysLabels = weekdaysLabels;
-    this.monthsLabels = monthsLabels;
-    this.checkin = checkin;
-    this.checkout = checkout;
-    this.orientation = orientation;
-    this.horizontalPages = horizontalPages;
-    this.verticalPages = verticalPages;
-    this.onCheckinChange = onCheckinChange;
-    this.onCheckoutChange = onCheckoutChange;
+    this.#DOMElement = DOMElement;
+    this.#today = today;
+    this.#initialDate = initialDate;
+    this.#weekdaysLabels = weekdaysLabels;
+    this.#monthsLabels = monthsLabels;
+    this.#checkin = checkin;
+    this.#checkout = checkout;
+    this.#orientation = orientation;
+    this.#horizontalPages = horizontalPages;
+    this.#verticalPages = verticalPages;
+    this.#onCheckinChange = onCheckinChange;
+    this.#onCheckoutChange = onCheckoutChange;
 
     this.renderCalendar({
-      DOMElement: this.DOMElement,
-      today: this.today,
-      initialDate: this.initialDate,
-      weekdaysLabels: this.weekdaysLabels,
-      monthsLabels: this.monthsLabels,
-      checkin: this.checkin,
-      checkout: this.checkout,
-      orientation: this.orientation,
-      horizontalPages: this.horizontalPages,
-      verticalPages: this.verticalPages,
-      onCheckinChange: this.onCheckinChange,
-      onCheckoutChange: this.onCheckoutChange,
+      DOMElement: this.#DOMElement,
+      today: this.#today,
+      initialDate: this.#initialDate,
+      weekdaysLabels: this.#weekdaysLabels,
+      monthsLabels: this.#monthsLabels,
+      checkin: this.#checkin,
+      checkout: this.#checkout,
+      orientation: this.#orientation,
+      horizontalPages: this.#horizontalPages,
+      verticalPages: this.#verticalPages,
+      onCheckinChange: this.#onCheckinChange,
+      onCheckoutChange: this.#onCheckoutChange,
     });
   }
 
@@ -78,10 +78,10 @@ class CalendarInitiator {
   onPrev = () => {
     this.removeCalendar();
 
-    this.initialDate.setMonth(this.initialDate.getMonth() - 1);
+    this.#initialDate.setMonth(this.#initialDate.getMonth() - 1);
 
     this.renderCalendar({
-      initialDate: this.initialDate,
+      initialDate: this.#initialDate,
       orientation: "horizontal",
     });
   };
@@ -89,10 +89,10 @@ class CalendarInitiator {
   onNext = () => {
     this.removeCalendar();
 
-    this.initialDate.setMonth(this.initialDate.getMonth() + 1);
+    this.#initialDate.setMonth(this.#initialDate.getMonth() + 1);
 
     this.renderCalendar({
-      initialDate: this.initialDate,
+      initialDate: this.#initialDate,
       orientation: "horizontal",
     });
   };
@@ -106,12 +106,12 @@ class CalendarInitiator {
     const selectedDate = new Date(year, month, day);
     const formattedDate = `${day}/${monthWithoutIndex}/${year}`;
 
-    if (selectedDate <= this.checkin) {
+    if (selectedDate <= this.#checkin) {
       this.setCheckin(selectedDate, formattedDate);
-    } else if (differenceInDays(selectedDate, this.checkout) > 2) {
+    } else if (differenceInDays(selectedDate, this.#checkout) > 2) {
       this.setCheckin(selectedDate, formattedDate);
       this.setCheckout(null, null);
-    } else if (selectedDate > this.checkin) {
+    } else if (selectedDate > this.#checkin) {
       this.setCheckout(selectedDate, formattedDate);
     }
 
@@ -121,26 +121,26 @@ class CalendarInitiator {
   };
 
   setCheckin = (checkin, formattedCheckin) => {
-    this.checkin = checkin;
-    if (!!formattedCheckin) this.onCheckinChange(formattedCheckin);
+    this.#checkin = checkin;
+    if (!!formattedCheckin) this.#onCheckinChange(formattedCheckin);
   };
 
   setCheckout = (checkout, formattedCheckout) => {
-    this.checkout = checkout;
-    if (!!formattedCheckout) this.onCheckoutChange(formattedCheckout);
+    this.#checkout = checkout;
+    if (!!formattedCheckout) this.#onCheckoutChange(formattedCheckout);
   };
 
   renderCalendar = ({
-    DOMElement = this.DOMElement,
-    today = this.today,
-    initialDate = this.initialDate,
-    weekdaysLabels = this.weekdaysLabels,
-    monthsLabels = this.monthsLabels,
-    checkin = this.checkin,
-    checkout = this.checkout,
-    orientation = this.orientation,
-    horizontalPages = this.horizontalPages,
-    verticalPages = this.verticalPages,
+    DOMElement = this.#DOMElement,
+    today = this.#today,
+    initialDate = this.#initialDate,
+    weekdaysLabels = this.#weekdaysLabels,
+    monthsLabels = this.#monthsLabels,
+    checkin = this.#checkin,
+    checkout = this.#checkout,
+    orientation = this.#orientation,
+    horizontalPages = this.#horizontalPages,
+    verticalPages = this.#verticalPages,
   }) => {
     // informations about today
     const currentDay = today.getDate();
