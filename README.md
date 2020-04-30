@@ -111,22 +111,22 @@ const calendar = new UniversalCalendar({configs here})
 
 ### `4: Add custom css hooking to existing classes`
 
-In order to
+In order to add some style customization, you need to override these CSS classes (optional):
 
-- calendar\_\_wrapper--horizontal
-- calendar\_\_wrapper--vertical
-- calendar\_\_weekday
-- calendar\_\_header
-- calendar\_\_arrow-wrapper
-- calendar\_\_arrow
-- calendar\_\_arrow--left
-- calendar\_\_arrow--right
-- calendar\_\_cell
-- cell--past
-- cell--checkin
-- cell--checkout
-- cell--range
-- cell--today
+- **_`calendar__arrow-wrapper`_**: calendar generic wrapper
+- **_`calendar__wrapper--horizontal`_**: calendar wrapper with horizontal orientation
+- **_`calendar__wrapper--vertical`_**: calendar wrapper with horizontal orientation
+- **_`calendar__weekday`_**: Each generic weekday on the top of calendar
+- **_`calendar__header`_**: Header with month - year values
+- **_`calendar__arrow`_** : Arrow to change month in horizontal view
+- **_`calendar__arrow--left`_**: Arrow left
+- **_`calendar__arrow--right`_**: Arrow right
+- **_`calendar__cell`_**: Each generic calendar day
+- **_`calendar__cell--past`_**: A past day in calendar
+- **_`calendar__cell--checkin`_**: Selected checkin in calendar
+- **_`calendar__cell--checkout`_**: Selected checkout in calendar
+- **_`calendar__cell--range`_**: Date between checkin and checkout
+- **_`calendar__cell--today`_**: Today date
 
 <!-- CONTACT -->
 

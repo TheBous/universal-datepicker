@@ -3,7 +3,8 @@
   height: 20em;
 }
 
-.calendar__wrapper {}
+.calendar__wrapper {
+}
 
 .calendar__wrapper--horizontal {
   display: flex;
@@ -41,23 +42,23 @@
   cursor: pointer;
 }
 
-.cell--past {
+.calendar__cell--past {
   cursor: default;
   text-decoration: line-through;
 }
 
-.cell--checkin {
+.calendar__cell--checkin {
   background: yellow;
 }
 
-.cell--checkout {
+.calendar__cell--checkout {
   background: blueviolet;
 }
 
-.cell--range {
+.calendar__cell--range {
   background: salmon;
 }
 
-.cell--today {
+.calendar__cell--today {
   border: 1px solid black;
 }

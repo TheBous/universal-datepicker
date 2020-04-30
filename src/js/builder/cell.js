@@ -79,7 +79,7 @@ export const renderCellWeekdays = ({
 
         cell.setAttribute("data-date", `${year}-${UIMonth}-${renderedDay}`);
         if (isBefore({ year, month, day: renderedDay }, today)) {
-          cell.classList.add("cell--past");
+          cell.classList.add("calendar__cell--past");
         }
 
         if (
@@ -87,15 +87,15 @@ export const renderCellWeekdays = ({
           unpackedCheckin.month === month &&
           unpackedCheckin.year === year
         ) {
-          cell.classList.add("cell--checkin");
+          cell.classList.add("calendar__cell--checkin");
         } else if (
           unpackedCheckout.day === renderedDay &&
           unpackedCheckout.month === month &&
           unpackedCheckout.year === year
         ) {
-          cell.classList.add("cell--checkout");
+          cell.classList.add("calendar__cell--checkout");
         } else if (dateInRange(checkin, checkout, currentCellDate)) {
-          cell.classList.add("cell--range");
+          cell.classList.add("calendar__cell--range");
         }
 
         cellText = document.createTextNode(renderedDay);
@@ -105,11 +105,11 @@ export const renderCellWeekdays = ({
           month === today.getMonth() &&
           year === today.getFullYear()
         ) {
-          cell.classList.add("cell--today");
+          cell.classList.add("calendar__cell--today");
         }
         cell.appendChild(cellText);
         row.appendChild(cell);
-        if (!cell.classList.contains("cell--past"))
+        if (!cell.classList.contains("calendar__cell--past"))
           cell.onclick = (e) => onCellClick(e, year, month);
         renderedDay++;
       }
