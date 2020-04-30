@@ -1,7 +1,12 @@
 import { letterWeekDays } from "./js/constants/weekdays";
 import { letterMonths } from "./js/constants/months";
 import { renderCalendarBlocks } from "./js/builder/calendar";
-import { differenceInDays } from "./js/helpers/index";
+import {
+  differenceInDays,
+  areDatesEquals,
+  dateInRange,
+} from "./js/helpers/index";
+import "./css/index.scss";
 
 class CalendarInitiator {
   #DOMElement;
@@ -32,7 +37,7 @@ class CalendarInitiator {
     checkin = new Date(2020, 4, 5),
     checkout = new Date(2020, 4, 8),
     // calendar orientation : vertical with scroll or horizontal with arrows (horizontal|vertical)
-    orientation = "horizontal",
+    orientation = "vertical",
     // number of calendar page per view in horizontal view
     horizontalPages = 2,
     // number of calendar page per view in vertical view
@@ -104,30 +109,85 @@ class CalendarInitiator {
     const monthWithoutIndex = month + 1;
     const { textContent: day } = event.target;
 
-    const selectedDate = new Date(year, month, day);
-    const formattedDate = `${day}/${monthWithoutIndex}/${year}`;
-
-    if (selectedDate <= this.#checkin) {
-      this.setCheckin(selectedDate, formattedDate);
-    } else if (differenceInDays(selectedDate, this.#checkout) > 2) {
-      this.setCheckin(selectedDate, formattedDate);
-      this.setCheckout(null, null);
-    } else if (selectedDate > this.#checkin) {
-      this.setCheckout(selectedDate, formattedDate);
-    }
-
-    this.removeCalendar();
-    this.renderCalendar({});
+    this.updateCalendar(year, month, day);
   };
 
-  setCheckin = (checkin, formattedCheckin) => {
+  setCheckin = (checkin, formattedCheckin, cell, oldSelectedCell) => {
     this.#checkin = checkin;
+    console.error("new checkin ", this.#checkin);
     if (!!formattedCheckin) this.#onCheckinChange(formattedCheckin);
+    if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
+      oldSelectedCell.classList.remove("calendar__cell--checkin");
+    }
+    if (!!cell && cell instanceof Element)
+      cell.classList.add("calendar__cell--checkin");
   };
 
-  setCheckout = (checkout, formattedCheckout) => {
+  setCheckout = (checkout, formattedCheckout, cell, oldSelectedCell) => {
     this.#checkout = checkout;
     if (!!formattedCheckout) this.#onCheckoutChange(formattedCheckout);
+    if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
+      oldSelectedCell.classList.remove("calendar__cell--checkout");
+    }
+    if (!!cell && cell instanceof Element)
+      cell.classList.add("calendar__cell--checkout");
+  };
+
+  updateCalendar = (year, month, day) => {
+    // old selections DOM elements
+    const oldSelectedCheckin = document.querySelector(
+      ".calendar__cell--checkin"
+    );
+    const oldSelectedCheckout = document.querySelector(
+      ".calendar__cell--checkout"
+    );
+
+    // all shown calendar dates
+    const allCells = document.querySelectorAll(`[data-date]`);
+
+    // selected dates
+    const currentSelectedJSDate = new Date(year, month, day);
+    const currentSelectedFormattedDate = `${year}-${month + 1}-${day}`;
+
+    allCells.forEach((cell) => {
+      cell.classList.remove("calendar__cell--range");
+
+      const cellDate = new Date(cell.getAttribute("data-date"));
+
+      if (areDatesEquals(cellDate, currentSelectedJSDate)) {
+        if (currentSelectedJSDate <= this.#checkin) {
+          this.setCheckin(
+            currentSelectedJSDate,
+            currentSelectedFormattedDate,
+            cell,
+            oldSelectedCheckin
+          );
+        } else if (
+          differenceInDays(currentSelectedJSDate, this.#checkout) > 2
+        ) {
+          this.setCheckin(
+            currentSelectedJSDate,
+            currentSelectedFormattedDate,
+            cell,
+            oldSelectedCheckin
+          );
+          this.setCheckout(null, null, null, oldSelectedCheckout);
+        } else if (currentSelectedJSDate > this.#checkin) {
+          this.setCheckout(
+            currentSelectedJSDate,
+            currentSelectedFormattedDate,
+            cell,
+            oldSelectedCheckout
+          );
+        }
+      }
+
+      // if dates in range
+      if (dateInRange(this.#checkin, this.#checkout, cellDate)) {
+        console.error(this.#checkin, this.#checkout, cellDate);
+        cell.classList.add("calendar__cell--range");
+      }
+    });
   };
 
   renderCalendar = ({

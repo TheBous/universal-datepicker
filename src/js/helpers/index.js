@@ -6,7 +6,7 @@ export const getDayInWeek = (month, year) => {
   return new Date(year, month, 0).getDay();
 };
 export const dateInRange = (checkin, checkout, date) => {
-  return date >= checkin && date <= checkout;
+  return date > checkin && date < checkout;
 };
 
 export const differenceInDays = (date1, date2) => {
@@ -20,6 +20,10 @@ export const differenceInDays = (date1, date2) => {
 export const isBefore = ({ year, month, day }, date2) => {
   const date1 = new Date(year, month, day);
   date2.setHours(0, 0, 0, 0);
-  
+
   return date1 < date2;
+};
+
+export const areDatesEquals = (date1, date2) => {
+  return date1.getTime() === date2.getTime();
 };
