@@ -89,6 +89,8 @@ yarn start
 
 12. **_`onCheckoutChange`_**: (function) callback triggered with new checkout date (dd/mm/yyyy) .
 
+13. **_`maxCheckin`_**: max number of days between checkin and checkout (default = 30)
+
 ### Installation
 
 ### `1: Install NPM packages`

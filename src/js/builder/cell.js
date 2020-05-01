@@ -18,6 +18,7 @@ export const renderCellWeekdays = ({
   defaultCheckin,
   defaultCheckout,
   onCellClick,
+  maxCheckin,
 }) => {
   // month in right orthodox index (1-12) to print month to UI
   const UIMonth = month + 1;
@@ -96,6 +97,8 @@ export const renderCellWeekdays = ({
           cell.classList.add("calendar__cell--checkout");
         } else if (dateInRange(checkin, checkout, currentCellDate)) {
           cell.classList.add("calendar__cell--range");
+        } else if (currentCellDate > maxCheckin) {
+          cell.classList.add("calendar__cell--disabled");
         }
 
         cellText = document.createTextNode(renderedDay);
@@ -109,7 +112,10 @@ export const renderCellWeekdays = ({
         }
         cell.appendChild(cellText);
         row.appendChild(cell);
-        if (!cell.classList.contains("calendar__cell--past"))
+        if (
+          !cell.classList.contains("calendar__cell--past") ||
+          !cell.classList.contains("calendar__cell--disabled")
+        )
           cell.onclick = (e) => onCellClick(e, year, month);
         renderedDay++;
       }

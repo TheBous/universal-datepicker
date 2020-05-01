@@ -1,7 +1,7 @@
 import { letterWeekDays } from "./js/constants/weekdays";
 import { letterMonths } from "./js/constants/months";
 import { renderCalendarBlocks } from "./js/builder/calendar";
-import { differenceInDays, dateInRange } from "./js/helpers/index";
+import { differenceInDays, dateInRange, addDays } from "./js/helpers/index";
 import "./css/index.scss";
 
 class CalendarInitiator {
@@ -17,6 +17,7 @@ class CalendarInitiator {
   #verticalPages;
   #onCheckinChange;
   #onCheckoutChange;
+  #maxCheckin;
 
   constructor({
     // DOM element to which the calendar should be attached
@@ -30,10 +31,10 @@ class CalendarInitiator {
     // Array of months label in current language
     monthsLabels = letterMonths,
     // checkin,checkout in javascript date format
-    checkin = new Date(2020, 4, 5),
-    checkout = new Date(2020, 4, 8),
+    checkin = new Date(),
+    checkout = new Date(),
     // calendar orientation : vertical with scroll or horizontal with arrows (horizontal|vertical)
-    orientation = "vertical",
+    orientation = "horizontal",
     // number of calendar page per view in horizontal view
     horizontalPages = 2,
     // number of calendar page per view in vertical view
@@ -43,6 +44,8 @@ class CalendarInitiator {
     // callback when select checkin field
     onCheckoutChange = (checkout) =>
       console.info("On checkout change", checkout),
+    // max number of days between checkin and checkout
+    maxCheckin = 30,
   } = {}) {
     this.#DOMElement = DOMElement;
     this.#today = today;
@@ -56,6 +59,7 @@ class CalendarInitiator {
     this.#verticalPages = verticalPages;
     this.#onCheckinChange = onCheckinChange;
     this.#onCheckoutChange = onCheckoutChange;
+    this.#maxCheckin = addDays(new Date(), maxCheckin);
 
     this.renderCalendar({
       DOMElement: this.#DOMElement,
@@ -70,6 +74,7 @@ class CalendarInitiator {
       verticalPages: this.#verticalPages,
       onCheckinChange: this.#onCheckinChange,
       onCheckoutChange: this.#onCheckoutChange,
+      maxCheckin: this.#maxCheckin,
     });
   }
 
@@ -83,10 +88,7 @@ class CalendarInitiator {
 
     this.#initialDate.setMonth(this.#initialDate.getMonth() - 1);
 
-    this.renderCalendar({
-      initialDate: this.#initialDate,
-      orientation: "horizontal",
-    });
+    this.renderCalendar({});
   };
 
   onNext = () => {
@@ -94,10 +96,7 @@ class CalendarInitiator {
 
     this.#initialDate.setMonth(this.#initialDate.getMonth() + 1);
 
-    this.renderCalendar({
-      initialDate: this.#initialDate,
-      orientation: "horizontal",
-    });
+    this.renderCalendar({});
   };
 
   // This month start from 0
@@ -109,6 +108,8 @@ class CalendarInitiator {
 
   setCheckin = (checkin, formattedCheckin, cell, oldSelectedCell) => {
     this.#checkin = checkin;
+
+    this.#maxCheckin = addDays(this.#checkin, 30);
     if (!!formattedCheckin) this.#onCheckinChange(formattedCheckin);
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkin");
@@ -166,15 +167,18 @@ class CalendarInitiator {
       );
     }
 
-    // dates between range
+    // dates between range and checks for max checkin
     const allCells = document.querySelectorAll(`[data-date]`);
     allCells.forEach((cell) => {
       cell.classList.remove("calendar__cell--range");
+      cell.classList.remove("calendar__cell--disabled");
 
       const cellDate = new Date(cell.getAttribute("data-date"));
       // if dates in range
       if (dateInRange(this.#checkin, this.#checkout, cellDate)) {
         cell.classList.add("calendar__cell--range");
+      } else if (cellDate >= this.#maxCheckin) {
+        cell.classList.add("calendar__cell--disabled");
       }
     });
   };
@@ -190,6 +194,7 @@ class CalendarInitiator {
     orientation = this.#orientation,
     horizontalPages = this.#horizontalPages,
     verticalPages = this.#verticalPages,
+    maxCheckin = this.#maxCheckin,
   }) => {
     // informations about today
     const currentDay = today.getDate();
@@ -240,6 +245,7 @@ class CalendarInitiator {
         onNext: this.onNext,
         onCellClick: this.onCellClick,
         orientation,
+        maxCheckin,
       });
     }
   };

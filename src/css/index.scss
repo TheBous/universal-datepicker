@@ -42,7 +42,8 @@
   cursor: pointer;
 }
 
-.calendar__cell--past {
+.calendar__cell--past,
+.calendar__cell--disabled {
   cursor: default;
   text-decoration: line-through;
 }

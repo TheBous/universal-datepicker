@@ -27,3 +27,8 @@ export const isBefore = ({ year, month, day }, date2) => {
 export const areDatesEquals = (date1, date2) => {
   return date1.getTime() === date2.getTime();
 };
+
+export const addDays = (date, days) => {
+  const updateDate = date.setDate(date.getDate() + days);
+  return new Date(updateDate);
+};

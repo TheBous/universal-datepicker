@@ -15,6 +15,7 @@ export const renderCalendarBlocks = ({
   onNext,
   onCellClick,
   orientation,
+  maxCheckin,
 }) => {
   const calendarTable = document.createElement("table");
 
@@ -50,6 +51,7 @@ export const renderCalendarBlocks = ({
     defaultCheckin,
     defaultCheckout,
     onCellClick,
+    maxCheckin,
   });
 
   container.appendChild(calendarTable);
