@@ -116,11 +116,12 @@ const calendar = new UniversalCalendar({configs here})
 
 In order to add some style customization, you need to override these CSS classes (optional):
 
-- **_`calendar__arrow-wrapper`_**: calendar generic wrapper
+- **_`calendar__wrapper`_**: calendar generic wrapper
 - **_`calendar__wrapper--horizontal`_**: calendar wrapper with horizontal orientation
 - **_`calendar__wrapper--vertical`_**: calendar wrapper with horizontal orientation
 - **_`calendar__weekday`_**: Each generic weekday on the top of calendar
 - **_`calendar__header`_**: Header with month - year values
+- **_`calendar__arrow-wrapper`_**: Horizontal calendar arrows wrapper
 - **_`calendar__arrow`_** : Arrow to change month in horizontal view
 - **_`calendar__arrow--left`_**: Arrow left
 - **_`calendar__arrow--right`_**: Arrow right
