@@ -99,9 +99,10 @@ yarn start
 yarn add universal-datepicker
 ```
 
-### `2: Add this line when you want to show calendar`
+### `2: Add these lines when you want to show calendar`
 
 ```sh
+const UniversalCalendar = require("universal-datepicker");
 const calendar = new UniversalCalendar({configs here})
 ```
 
