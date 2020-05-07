@@ -40,10 +40,11 @@ class CalendarInitiator {
     // number of calendar page per view in vertical view
     verticalPages = 10,
     // callback when select checkin field
-    onCheckinChange = (checkin) => console.info("On checkin change", checkin),
+    onCheckinChange = (event, checkin) =>
+      console.info("On checkin change", event, checkin),
     // callback when select checkin field
-    onCheckoutChange = (checkout) =>
-      console.info("On checkout change", checkout),
+    onCheckoutChange = (event, checkout) =>
+      console.info("On checkout change", event, checkout),
     // max number of days between checkin and checkout
     maxCheckin = 30,
   } = {}) {
@@ -104,14 +105,14 @@ class CalendarInitiator {
     const { textContent: day } = event.target;
 
     console.error("oncell click");
-    this.updateCalendar(year, month, day);
+    this.updateCalendar(event, year, month, day);
   };
 
-  setCheckin = (checkin, formattedCheckin, cell, oldSelectedCell) => {
+  setCheckin = (event, checkin, formattedCheckin, cell, oldSelectedCell) => {
     this.#checkin = checkin;
 
     //this.#maxCheckin = addDays(this.#checkin, 30);
-    if (!!formattedCheckin) this.#onCheckinChange(formattedCheckin);
+    if (!!formattedCheckin) this.#onCheckinChange(event, formattedCheckin);
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkin");
     }
@@ -119,9 +120,9 @@ class CalendarInitiator {
       cell.classList.add("calendar__cell--checkin");
   };
 
-  setCheckout = (checkout, formattedCheckout, cell, oldSelectedCell) => {
+  setCheckout = (event, checkout, formattedCheckout, cell, oldSelectedCell) => {
     this.#checkout = checkout;
-    if (!!formattedCheckout) this.#onCheckoutChange(formattedCheckout);
+    if (!!formattedCheckout) this.#onCheckoutChange(event, formattedCheckout);
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkout");
     }
@@ -129,7 +130,7 @@ class CalendarInitiator {
       cell.classList.add("calendar__cell--checkout");
   };
 
-  updateCalendar = (year, month, day) => {
+  updateCalendar = (event, year, month, day) => {
     // old selections DOM elements
     const oldSelectedCheckin = document.querySelector(
       ".calendar__cell--checkin"
@@ -146,6 +147,7 @@ class CalendarInitiator {
 
     if (currentSelectedJSDate <= this.#checkin) {
       this.setCheckin(
+        event,
         currentSelectedJSDate,
         currentSelectedFormattedDate,
         currentSelectedDOMCell,
@@ -153,14 +155,16 @@ class CalendarInitiator {
       );
     } else if (differenceInDays(currentSelectedJSDate, this.#checkout) > 2) {
       this.setCheckin(
+        event,
         currentSelectedJSDate,
         currentSelectedFormattedDate,
         currentSelectedDOMCell,
         oldSelectedCheckin
       );
-      this.setCheckout(null, null, null, oldSelectedCheckout);
+      this.setCheckout(event, null, null, null, oldSelectedCheckout);
     } else if (currentSelectedJSDate > this.#checkin) {
       this.setCheckout(
+        event,
         currentSelectedJSDate,
         currentSelectedFormattedDate,
         currentSelectedDOMCell,
