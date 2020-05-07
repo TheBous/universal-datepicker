@@ -172,14 +172,14 @@ class CalendarInitiator {
     const allCells = document.querySelectorAll(`[data-date]`);
     allCells.forEach((cell) => {
       cell.classList.remove("calendar__cell--range");
-      cell.classList.remove("calendar__cell--disabled");
+      //cell.classList.remove("calendar__cell--disabled");
 
       const cellDate = new Date(cell.getAttribute("data-date"));
       // if dates in range
       if (dateInRange(this.#checkin, this.#checkout, cellDate)) {
         cell.classList.add("calendar__cell--range");
       } else if (cellDate >= this.#maxCheckin) {
-        cell.classList.add("calendar__cell--disabled");
+        //cell.classList.add("calendar__cell--disabled");
       }
     });
   };

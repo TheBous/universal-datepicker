@@ -98,7 +98,7 @@ export const renderCellWeekdays = ({
         } else if (dateInRange(checkin, checkout, currentCellDate)) {
           cell.classList.add("calendar__cell--range");
         } else if (currentCellDate > maxCheckin) {
-          cell.classList.add("calendar__cell--disabled");
+          //cell.classList.add("calendar__cell--disabled");
         }
 
         cellText = document.createTextNode(renderedDay);
@@ -113,8 +113,8 @@ export const renderCellWeekdays = ({
         cell.appendChild(cellText);
         row.appendChild(cell);
         if (
-          !cell.classList.contains("calendar__cell--past") &&
-          !cell.classList.contains("calendar__cell--disabled")
+          !cell.classList.contains("calendar__cell--past")
+          //!cell.classList.contains("calendar__cell--disabled")
         )
           cell.onclick = (e) => onCellClick(e, year, month);
         renderedDay++;
