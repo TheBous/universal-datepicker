@@ -32,7 +32,7 @@ class CalendarInitiator {
     monthsLabels = letterMonths,
     // checkin,checkout in javascript date format
     checkin = new Date(),
-    checkout = new Date(),
+    checkout = new Date("2020/05/20"),
     // calendar orientation : vertical with scroll or horizontal with arrows (horizontal|vertical)
     orientation = "horizontal",
     // number of calendar page per view in horizontal view
@@ -103,13 +103,14 @@ class CalendarInitiator {
   onCellClick = (event, year, month) => {
     const { textContent: day } = event.target;
 
+    console.error("oncell click");
     this.updateCalendar(year, month, day);
   };
 
   setCheckin = (checkin, formattedCheckin, cell, oldSelectedCell) => {
     this.#checkin = checkin;
 
-    this.#maxCheckin = addDays(this.#checkin, 30);
+    //this.#maxCheckin = addDays(this.#checkin, 30);
     if (!!formattedCheckin) this.#onCheckinChange(formattedCheckin);
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkin");

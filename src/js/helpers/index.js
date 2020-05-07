@@ -29,6 +29,7 @@ export const areDatesEquals = (date1, date2) => {
 };
 
 export const addDays = (date, days) => {
-  const updateDate = date.setDate(date.getDate() + days);
+  const newDate = new Date(date);
+  const updateDate = newDate.setDate(newDate.getDate() + days);
   return new Date(updateDate);
 };

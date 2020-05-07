@@ -113,7 +113,7 @@ export const renderCellWeekdays = ({
         cell.appendChild(cellText);
         row.appendChild(cell);
         if (
-          !cell.classList.contains("calendar__cell--past") ||
+          !cell.classList.contains("calendar__cell--past") &&
           !cell.classList.contains("calendar__cell--disabled")
         )
           cell.onclick = (e) => onCellClick(e, year, month);
