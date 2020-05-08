@@ -101,7 +101,10 @@ export const renderCellWeekdays = ({
           //cell.classList.add("calendar__cell--disabled");
         }
 
+        const text = document.createElement("span");
+        text.classList.add("calendar__cell__text");
         cellText = document.createTextNode(renderedDay);
+
         // today
         if (
           renderedDay === currentDayInMonth &&
@@ -110,7 +113,8 @@ export const renderCellWeekdays = ({
         ) {
           cell.classList.add("calendar__cell--today");
         }
-        cell.appendChild(cellText);
+        text.appendChild(cellText);
+        cell.appendChild(text);
         row.appendChild(cell);
         if (
           !cell.classList.contains("calendar__cell--past")
