@@ -250,7 +250,7 @@ class CalendarInitiator {
         currentYear,
         currentDayInMonth: currentDay,
         month: initialDate.getMonth(),
-        year: thisinitialDate.getFullYear(),
+        year: initialDate.getFullYear(),
         defaultCheckin: this.#checkin,
         defaultCheckout: this.#checkout,
         today: this.#today,
