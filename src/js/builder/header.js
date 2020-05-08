@@ -4,7 +4,7 @@ export const renderHeader = (month, monthsLabels, year) => {
   header.className = "calendar__header";
 
   const printedMonth = document.createElement("span");
-  printedMonth.innerHTML = `${currentMonth}${year}`;
+  printedMonth.innerHTML = `${currentMonth} ${year}`;
 
   header.appendChild(printedMonth);
 
