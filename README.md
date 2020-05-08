@@ -67,7 +67,7 @@ yarn start
 
 1. **_`DOMElement`_**: DOM element to which the calendar should be attached (es. body, #app)
 
-2. **_`today`_**: Pass today from the parent application, so calendar can avoid to adapt itself to internalization and/or timezones.
+2. **_`today`_**: Pass today from the parent application, so calendar can avoid to adapt itself to internalization and/or timezones. Today could be a js `Date`, a string formatted with `YYYY/MM/DD` or an object `{ year, month, day }`
 
 3. **_`initialDate`_**: selected date to fit calendar to the right month/year on the splash screen
 

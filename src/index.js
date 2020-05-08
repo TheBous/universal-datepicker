@@ -1,7 +1,12 @@
 import { letterWeekDays } from "./js/constants/weekdays";
 import { letterMonths } from "./js/constants/months";
 import { renderCalendarBlocks } from "./js/builder/calendar";
-import { differenceInDays, dateInRange, addDays } from "./js/helpers/index";
+import {
+  differenceInDays,
+  dateInRange,
+  addDays,
+  formatToday,
+} from "./js/helpers/index";
 import "./css/index.scss";
 
 class CalendarInitiator {
@@ -49,7 +54,7 @@ class CalendarInitiator {
     maxCheckin = 30,
   } = {}) {
     this.#DOMElement = DOMElement;
-    this.#today = today;
+    this.#today = formatToday(today);
     this.#initialDate = initialDate;
     this.#weekdaysLabels = weekdaysLabels;
     this.#monthsLabels = monthsLabels;
