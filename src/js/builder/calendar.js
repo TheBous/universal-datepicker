@@ -11,10 +11,7 @@ export const renderCalendarBlocks = ({
   defaultCheckout,
   weekdaysLabels,
   monthsLabels,
-  onPrev,
-  onNext,
   onCellClick,
-  orientation,
   maxCheckin,
 }) => {
   const calendarTable = document.createElement("table");
