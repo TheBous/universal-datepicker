@@ -5,12 +5,10 @@ import {
   isBefore,
 } from "../helpers";
 import { renderLetterWeekdays } from "./letterWeekdays";
-import { renderHeader } from "./header";
 
 export const renderCellWeekdays = ({
   container,
   currentDayInMonth,
-  monthsLabels,
   weekdaysLabels,
   month,
   year,
@@ -25,8 +23,6 @@ export const renderCellWeekdays = ({
   const firstDayOfMonthInWeek = getDayInWeek(month, year);
   const daysInMonth = getDaysInMonth(month, year);
   let renderedDay = 1;
-
-  container.appendChild(renderHeader(month, monthsLabels, year));
 
   renderLetterWeekdays(weekdaysLabels, container);
 

@@ -1,4 +1,5 @@
 import { renderCellWeekdays } from "../builder/cell";
+import { renderHeader } from "./header";
 
 export const renderCalendarBlocks = ({
   container,
@@ -14,8 +15,13 @@ export const renderCalendarBlocks = ({
   onCellClick,
   maxCheckin,
 }) => {
+  const tableWrapper = document.createElement("div");
+  tableWrapper.classList.add("table-wrapper");
   const calendarTable = document.createElement("table");
-
+  // Month - Year
+  tableWrapper.appendChild(renderHeader(month, monthsLabels, year));
+  // Cells calendar table
+  tableWrapper.appendChild(calendarTable);
   // print cells
   renderCellWeekdays({
     container: calendarTable,
@@ -31,5 +37,5 @@ export const renderCalendarBlocks = ({
     maxCheckin,
   });
 
-  container.appendChild(calendarTable);
+  container.appendChild(tableWrapper);
 };
