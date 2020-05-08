@@ -108,7 +108,6 @@ class CalendarInitiator {
   setCheckin = (event, checkin, paddedDate, cell, oldSelectedCell) => {
     this.#checkin = checkin;
 
-    console.error(checkin, paddedDate, this.#checkin, this.#checkout);
     //this.#maxCheckin = addDays(this.#checkin, 30);
     if (!!paddedDate)
       this.#onCheckinChange(event, {
@@ -124,8 +123,6 @@ class CalendarInitiator {
 
   setCheckout = (event, checkout, paddedDate, cell, oldSelectedCell) => {
     this.#checkout = checkout;
-
-    console.error(checkout, paddedDate, this.#checkin, this.#checkout);
 
     if (!!paddedDate)
       this.#onCheckoutChange(event, {
@@ -153,7 +150,6 @@ class CalendarInitiator {
     const currentSelectedPaddedDate = `${year}-${str_pad(month + 1)}-${str_pad(
       day
     )}`;
-    console.error(currentSelectedFormattedDate);
     const currentSelectedDOMCell = document.querySelector(
       `[data-date="${currentSelectedFormattedDate}"]`
     );
