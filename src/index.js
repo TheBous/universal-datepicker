@@ -222,6 +222,28 @@ class CalendarInitiator {
     // calendar table wrapper [internal DOM element]
     const calendarWrapper = document.createElement("div");
     calendarWrapper.id = "calendar__wrapper";
+
+    if (orientation === "horizontal") {
+      const arrowsContainer = document.createElement("div");
+      arrowsContainer.classList.add("calendar__arrow-wrapper");
+      calendarWrapper.appendChild(arrowsContainer);
+
+      const leftArrow = document.createElement("span");
+      leftArrow.onclick = () => onPrev();
+      leftArrow.classList.add("calendar__arrow");
+      leftArrow.classList.add("calendar__arrow--left");
+      leftArrow.innerHTML = "<";
+
+      const rightArrow = document.createElement("span");
+      rightArrow.onclick = () => onNext();
+      rightArrow.classList.add("calendar__arrow");
+      rightArrow.classList.add("calendar__arrow--right");
+      rightArrow.innerHTML = ">";
+
+      arrowsContainer.appendChild(leftArrow);
+      arrowsContainer.appendChild(rightArrow);
+    }
+
     if (orientation === "horizontal") calendarWrapper.style.display = "flex";
     calendarWrapper.className = `calendar__wrapper ${
       orientation === "vertical"
