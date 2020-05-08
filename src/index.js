@@ -194,13 +194,14 @@ class CalendarInitiator {
       // if dates in range
       if (dateInRange(this.#checkin, this.#checkout, cellDate)) {
         cell.classList.add("calendar__cell--range");
-      } else if (cellDate >= this.#maxCheckin) {
-        //cell.classList.add("calendar__cell--disabled");
-      } else if (
+      }
+      if (
         cell.classList.contains("calendar__cell--checkin") &&
         !this.#checkout
       ) {
         cell.classList.add("calendar__cell--checkin--mono");
+      } else if (cellDate >= this.#maxCheckin) {
+        //cell.classList.add("calendar__cell--disabled");
       }
     });
   };

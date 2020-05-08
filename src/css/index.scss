@@ -50,6 +50,9 @@
 
 .calendar__cell--checkin {
   background: yellow;
+  &--mono {
+    background: orange;
+  }
 }
 
 .calendar__cell--checkout {
