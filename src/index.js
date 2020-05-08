@@ -53,7 +53,7 @@ class CalendarInitiator {
     onCheckoutChange = (event, checkout) =>
       console.info("On checkout change", event, checkout),
     // on arrow prev click
-    onPrev = () => null,
+    onPrev = (e) => null,
     // on arrow next click
     onNext = () => null,
     // max number of days between checkin and checkout
@@ -209,13 +209,13 @@ class CalendarInitiator {
       calendarWrapper.appendChild(arrowsContainer);
 
       const leftArrow = document.createElement("span");
-      leftArrow.onclick = () => this.onPrev();
+      leftArrow.onclick = (e) => this.onPrev(e);
       leftArrow.classList.add("calendar__arrow");
       leftArrow.classList.add("calendar__arrow--left");
       leftArrow.innerHTML = "<";
 
       const rightArrow = document.createElement("span");
-      rightArrow.onclick = () => this.onNext();
+      rightArrow.onclick = (e) => this.onNext(e);
       rightArrow.classList.add("calendar__arrow");
       rightArrow.classList.add("calendar__arrow--right");
       rightArrow.innerHTML = ">";
