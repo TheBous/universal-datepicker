@@ -22,6 +22,8 @@ class CalendarInitiator {
   #verticalPages;
   #onCheckinChange;
   #onCheckoutChange;
+  #onPrev;
+  #onNext;
   #maxCheckin;
 
   constructor({
@@ -50,6 +52,10 @@ class CalendarInitiator {
     // callback when select checkin field
     onCheckoutChange = (event, checkout) =>
       console.info("On checkout change", event, checkout),
+    // on arrow prev click
+    onPrev = () => null,
+    // on arrow next click
+    onNext = () => null,
     // max number of days between checkin and checkout
     maxCheckin = 30,
   } = {}) {
@@ -65,23 +71,11 @@ class CalendarInitiator {
     this.#verticalPages = verticalPages;
     this.#onCheckinChange = onCheckinChange;
     this.#onCheckoutChange = onCheckoutChange;
+    this.#onPrev = onPrev;
+    this.#onNext = onNext;
     this.#maxCheckin = addDays(new Date(), maxCheckin);
 
-    this.renderCalendar({
-      DOMElement: this.#DOMElement,
-      today: this.#today,
-      initialDate: this.#initialDate,
-      weekdaysLabels: this.#weekdaysLabels,
-      monthsLabels: this.#monthsLabels,
-      checkin: this.#checkin,
-      checkout: this.#checkout,
-      orientation: this.#orientation,
-      horizontalPages: this.#horizontalPages,
-      verticalPages: this.#verticalPages,
-      onCheckinChange: this.#onCheckinChange,
-      onCheckoutChange: this.#onCheckoutChange,
-      maxCheckin: this.#maxCheckin,
-    });
+    this.renderCalendar();
   }
 
   removeCalendar = () => {
@@ -89,20 +83,18 @@ class CalendarInitiator {
     if (!!calendar) calendar.remove();
   };
 
-  onPrev = () => {
+  onPrev = (e) => {
+    this.#onPrev(e);
     this.removeCalendar();
-
     this.#initialDate.setMonth(this.#initialDate.getMonth() - 1);
-
-    this.renderCalendar({});
+    this.renderCalendar();
   };
 
-  onNext = () => {
+  onNext = (e) => {
+    this.#onNext(e);
     this.removeCalendar();
-
     this.#initialDate.setMonth(this.#initialDate.getMonth() + 1);
-
-    this.renderCalendar({});
+    this.renderCalendar();
   };
 
   // This month start from 0
@@ -193,37 +185,25 @@ class CalendarInitiator {
     });
   };
 
-  renderCalendar = ({
-    DOMElement = this.#DOMElement,
-    today = this.#today,
-    initialDate = this.#initialDate,
-    weekdaysLabels = this.#weekdaysLabels,
-    monthsLabels = this.#monthsLabels,
-    checkin = this.#checkin,
-    checkout = this.#checkout,
-    orientation = this.#orientation,
-    horizontalPages = this.#horizontalPages,
-    verticalPages = this.#verticalPages,
-    maxCheckin = this.#maxCheckin,
-  }) => {
+  renderCalendar = () => {
     // informations about today
-    const currentDay = today.getDate();
-    const currentMonth = today.getMonth() + 1;
-    const currentYear = today.getFullYear();
+    const currentDay = this.#today.getDate();
+    const currentMonth = this.#today.getMonth() + 1;
+    const currentYear = this.#today.getFullYear();
 
     // informations to initialize the right calendar view
-    const initialDay = initialDate.getDate();
-    const initialMonth = initialDate.getMonth();
-    const initialYear = initialDate.getFullYear();
+    const initialDay = this.#initialDate.getDate();
+    const initialMonth = this.#initialDate.getMonth();
+    const initialYear = this.#initialDate.getFullYear();
 
     // calendar table builder [external DOM element]
-    const calendarContainer = document.querySelector(DOMElement);
+    const calendarContainer = document.querySelector(this.#DOMElement);
 
     // calendar table wrapper [internal DOM element]
     const calendarWrapper = document.createElement("div");
     calendarWrapper.id = "calendar__wrapper";
 
-    if (orientation === "horizontal") {
+    if (this.#orientation === "horizontal") {
       const arrowsContainer = document.createElement("div");
       arrowsContainer.classList.add("calendar__arrow-wrapper");
       calendarWrapper.appendChild(arrowsContainer);
@@ -244,9 +224,10 @@ class CalendarInitiator {
       arrowsContainer.appendChild(rightArrow);
     }
 
-    if (orientation === "horizontal") calendarWrapper.style.display = "flex";
+    if (this.#orientation === "horizontal")
+      calendarWrapper.style.display = "flex";
     calendarWrapper.className = `calendar__wrapper ${
-      orientation === "vertical"
+      this.#orientation === "vertical"
         ? "calendar__wrapper--vertical"
         : "calendar__wrapper--horizontal"
     }`;
@@ -254,7 +235,9 @@ class CalendarInitiator {
     calendarContainer.appendChild(calendarWrapper);
 
     const loopSize =
-      orientation === "horizontal" ? horizontalPages : verticalPages;
+      this.#orientation === "horizontal"
+        ? this.#horizontalPages
+        : this.#verticalPages;
 
     for (let i = 0; i < loopSize; i++) {
       const initialDate = new Date(initialYear, initialMonth, initialDay);
@@ -267,17 +250,17 @@ class CalendarInitiator {
         currentYear,
         currentDayInMonth: currentDay,
         month: initialDate.getMonth(),
-        year: initialDate.getFullYear(),
-        defaultCheckin: checkin,
-        defaultCheckout: checkout,
-        today,
-        weekdaysLabels,
-        monthsLabels,
+        year: thisinitialDate.getFullYear(),
+        defaultCheckin: this.#checkin,
+        defaultCheckout: this.#checkout,
+        today: this.#today,
+        weekdaysLabels: this.#weekdaysLabels,
+        monthsLabels: this.#monthsLabels,
         onPrev: this.onPrev,
         onNext: this.onNext,
         onCellClick: this.onCellClick,
-        orientation,
-        maxCheckin,
+        orientation: this.#orientation,
+        maxCheckin: this.#maxCheckin,
       });
     }
   };
