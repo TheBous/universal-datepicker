@@ -52,3 +52,7 @@ export const formatToday = (today) => {
 
   return new Date();
 };
+
+export const str_pad = (n) => {
+  return String("00" + n).slice(-2);
+};

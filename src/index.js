@@ -6,6 +6,7 @@ import {
   dateInRange,
   addDays,
   formatToday,
+  str_pad,
 } from "./js/helpers/index";
 import "./css/index.scss";
 
@@ -47,15 +48,15 @@ class CalendarInitiator {
     // number of calendar page per view in vertical view
     verticalPages = 10,
     // callback when select checkin field
-    onCheckinChange = (event, checkin) =>
-      console.info("On checkin change", event, checkin),
+    onCheckinChange = (event, dates = {}) =>
+      console.info("On checkin change", event, dates),
     // callback when select checkin field
-    onCheckoutChange = (event, checkout) =>
-      console.info("On checkout change", event, checkout),
+    onCheckoutChange = (event, dates = {}) =>
+      console.info("On checkout change", event, dates),
     // on arrow prev click
     onPrev = (e) => null,
     // on arrow next click
-    onNext = () => null,
+    onNext = (e) => null,
     // max number of days between checkin and checkout
     maxCheckin = 30,
   } = {}) {
@@ -101,15 +102,19 @@ class CalendarInitiator {
   onCellClick = (event, year, month) => {
     const { textContent: day } = event.target;
 
-    console.error("oncell click");
     this.updateCalendar(event, year, month, day);
   };
 
-  setCheckin = (event, checkin, formattedCheckin, cell, oldSelectedCell) => {
+  setCheckin = (event, checkin, paddedDate, cell, oldSelectedCell) => {
     this.#checkin = checkin;
 
+    console.error(checkin, paddedDate, this.#checkin, this.#checkout);
     //this.#maxCheckin = addDays(this.#checkin, 30);
-    if (!!formattedCheckin) this.#onCheckinChange(event, formattedCheckin);
+    if (!!paddedDate)
+      this.#onCheckinChange(event, {
+        checkin: paddedDate,
+        checkout: this.#checkout,
+      });
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkin");
     }
@@ -117,9 +122,16 @@ class CalendarInitiator {
       cell.classList.add("calendar__cell--checkin");
   };
 
-  setCheckout = (event, checkout, formattedCheckout, cell, oldSelectedCell) => {
+  setCheckout = (event, checkout, paddedDate, cell, oldSelectedCell) => {
     this.#checkout = checkout;
-    if (!!formattedCheckout) this.#onCheckoutChange(event, formattedCheckout);
+
+    console.error(checkout, paddedDate, this.#checkin, this.#checkout);
+
+    if (!!paddedDate)
+      this.#onCheckoutChange(event, {
+        checkout: paddedDate,
+        checkin: this.#checkin,
+      });
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkout");
     }
@@ -138,6 +150,10 @@ class CalendarInitiator {
     // selected dates
     const currentSelectedJSDate = new Date(year, month, day);
     const currentSelectedFormattedDate = `${year}-${month + 1}-${day}`;
+    const currentSelectedPaddedDate = `${year}-${str_pad(month + 1)}-${str_pad(
+      day
+    )}`;
+    console.error(currentSelectedFormattedDate);
     const currentSelectedDOMCell = document.querySelector(
       `[data-date="${currentSelectedFormattedDate}"]`
     );
@@ -146,24 +162,24 @@ class CalendarInitiator {
       this.setCheckin(
         event,
         currentSelectedJSDate,
-        currentSelectedFormattedDate,
+        currentSelectedPaddedDate,
         currentSelectedDOMCell,
         oldSelectedCheckin
       );
     } else if (differenceInDays(currentSelectedJSDate, this.#checkout) > 2) {
+      this.setCheckout(event, null, null, null, oldSelectedCheckout);
       this.setCheckin(
         event,
         currentSelectedJSDate,
-        currentSelectedFormattedDate,
+        currentSelectedPaddedDate,
         currentSelectedDOMCell,
         oldSelectedCheckin
       );
-      this.setCheckout(event, null, null, null, oldSelectedCheckout);
     } else if (currentSelectedJSDate > this.#checkin) {
       this.setCheckout(
         event,
         currentSelectedJSDate,
-        currentSelectedFormattedDate,
+        currentSelectedPaddedDate,
         currentSelectedDOMCell,
         oldSelectedCheckout
       );
