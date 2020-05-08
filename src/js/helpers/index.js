@@ -33,3 +33,22 @@ export const addDays = (date, days) => {
   const updateDate = newDate.setDate(newDate.getDate() + days);
   return new Date(updateDate);
 };
+
+export const formatToday = (today) => {
+  if (today instanceof Date) return today;
+
+  if (typeof today === "string") {
+    const stringReg = /^\d{4}[/]\d{2}[/]\d{2}$/;
+    const isValidString = stringReg.matches(today);
+    if (isValidString) return new Date(today);
+    else return new Date();
+  }
+
+  if (typeof today === "object") {
+    if (today.year && today.month && today.day) {
+      return new Date(year, month, day);
+    }
+  }
+
+  return new Date();
+};
