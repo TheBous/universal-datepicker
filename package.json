@@ -1,6 +1,6 @@
 {
   "name": "universal-datepicker",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "author": "@TheBous <thebous1993@gmail.com> ()",
   "description": "Pure 8kb Vanilla Javascript plug and play datepicker",
   "main": "build/bundle.umd.js",
