@@ -171,7 +171,11 @@ class CalendarInitiator {
         currentSelectedDOMCell,
         oldSelectedCheckin
       );
-    } else if (differenceInDays(currentSelectedJSDate, this.#checkout) > 2) {
+    } else if (
+      differenceInDays(currentSelectedJSDate, this.#checkout) > 2 ||
+      (!!this.#checkout &&
+        currentSelectedJSDate.getTime() === this.#checkout.getTime())
+    ) {
       this.setCheckout(event, null, null, null, oldSelectedCheckout);
       this.setCheckin(
         event,
