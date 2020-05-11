@@ -91,6 +91,10 @@ yarn start
 
 13. **_`maxCheckin`_**: max number of days between checkin and checkout (default = 30)
 
+14. **_`leftArrowClassname`_**: Class to add some icon style to left arrow
+
+15. **_`rightArrowClassname`_**: Class to add some icon style to right arrow
+
 ### Installation
 
 ### `1: Install NPM packages`

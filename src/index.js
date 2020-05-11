@@ -26,6 +26,8 @@ class CalendarInitiator {
   #onPrev;
   #onNext;
   #maxCheckin;
+  #leftArrowClassname;
+  #rightArrowClassname;
 
   constructor({
     // DOM element to which the calendar should be attached
@@ -59,6 +61,10 @@ class CalendarInitiator {
     onNext = (e) => null,
     // max number of days between checkin and checkout
     maxCheckin = 30,
+    // Class to add some icon style to left arrow
+    leftArrowClassname = "left-arrow-icon",
+    // Class to add some icon style to right arrow
+    rightArrowClassname = "right-arrow-icon",
   } = {}) {
     this.#DOMElement = DOMElement;
     this.#today = formatToday(today);
@@ -75,6 +81,8 @@ class CalendarInitiator {
     this.#onPrev = onPrev;
     this.#onNext = onNext;
     this.#maxCheckin = addDays(new Date(), maxCheckin);
+    this.#leftArrowClassname = leftArrowClassname;
+    this.#rightArrowClassname = rightArrowClassname;
 
     this.renderCalendar();
   }
@@ -231,6 +239,8 @@ class CalendarInitiator {
 
       const leftArrow = document.createElement("span");
       const leftIcon = document.createElement("i");
+      if (!!this.#leftArrowClassname)
+        leftIcon.classList.add(this.#leftArrowClassname);
       leftArrow.onclick = (e) => this.onPrev(e);
       leftArrow.classList.add("calendar__arrow");
       leftArrow.classList.add("calendar__arrow--left");
@@ -238,6 +248,8 @@ class CalendarInitiator {
 
       const rightArrow = document.createElement("span");
       const rightIcon = document.createElement("i");
+      if (!!this.#rightArrowClassname)
+        rightIcon.classList.add(this.#rightArrowClassname);
       rightArrow.onclick = (e) => this.onNext(e);
       rightArrow.classList.add("calendar__arrow");
       rightArrow.classList.add("calendar__arrow--right");
