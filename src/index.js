@@ -229,17 +229,15 @@ class CalendarInitiator {
       arrowsContainer.classList.add("calendar__arrow-wrapper");
       calendarWrapper.appendChild(arrowsContainer);
 
-      const leftArrow = document.createElement("span");
+      const leftArrow = document.createElement("i");
       leftArrow.onclick = (e) => this.onPrev(e);
       leftArrow.classList.add("calendar__arrow");
       leftArrow.classList.add("calendar__arrow--left");
-      leftArrow.innerHTML = "<";
 
       const rightArrow = document.createElement("span");
       rightArrow.onclick = (e) => this.onNext(e);
       rightArrow.classList.add("calendar__arrow");
       rightArrow.classList.add("calendar__arrow--right");
-      rightArrow.innerHTML = ">";
 
       arrowsContainer.appendChild(leftArrow);
       arrowsContainer.appendChild(rightArrow);
