@@ -116,7 +116,17 @@ const calendar = new UniversalCalendar({configs here})
 <div id="calendar"></div>
 ```
 
-### `4: Add custom css hooking to existing classes`
+### `4: Horizontal arrows to switch months are <i></i>. You need to pass to application a class to this icons with leftArrowClassname and rightArrowClassname`
+
+```sh
+{
+  ...,
+  leftArrowClassname: "my-custom-right-arrow-class",
+  rightArrowClassname: "my-custom-right-arrow-class"
+}
+```
+
+### `5: Add custom css hooking to existing classes`
 
 In order to add some style customization, you need to override these CSS classes (optional):
 

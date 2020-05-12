@@ -164,6 +164,7 @@ class CalendarInitiator {
     );
 
     if (currentSelectedJSDate <= this.#checkin) {
+      this.setCheckout(event, null, null, null, oldSelectedCheckout);
       this.setCheckin(
         event,
         currentSelectedJSDate,
@@ -172,9 +173,9 @@ class CalendarInitiator {
         oldSelectedCheckin
       );
     } else if (
-      differenceInDays(currentSelectedJSDate, this.#checkout) > 2 ||
-      (!!this.#checkout &&
-        currentSelectedJSDate.getTime() === this.#checkout.getTime())
+      !!this.#checkout &&
+      (currentSelectedJSDate.getTime() === this.#checkout.getTime() ||
+        currentSelectedJSDate > this.#checkout)
     ) {
       this.setCheckout(event, null, null, null, oldSelectedCheckout);
       this.setCheckin(
