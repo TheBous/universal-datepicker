@@ -84,7 +84,7 @@ class CalendarInitiator {
     this.#leftArrowClassname = leftArrowClassname;
     this.#rightArrowClassname = rightArrowClassname;
 
-    this.renderCalendar();
+    process.env.NODE_ENV !== "production" && this.renderCalendar();
   }
 
   removeCalendar = () => {
