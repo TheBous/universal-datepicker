@@ -78,7 +78,7 @@ export const renderCellWeekdays = ({
 
         cell.setAttribute(
           "data-date",
-          `${year}-${paddedMonth}-${str_pad(renderedDay)}`
+          `${year}/${paddedMonth}/${str_pad(renderedDay)}`
         );
         if (isBefore({ year, month, day: renderedDay }, today)) {
           cell.classList.add("calendar__cell--past");

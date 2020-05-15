@@ -155,8 +155,8 @@ class CalendarInitiator {
     // selected dates
     const paddedDay = str_pad(day);
     const currentSelectedJSDate = new Date(year, month, paddedDay);
-    const currentSelectedFormattedDate = `${year}-${month + 1}-${day}`;
-    const currentSelectedPaddedDate = `${year}-${str_pad(month + 1)}-${str_pad(
+    const currentSelectedFormattedDate = `${year}/${month + 1}/${day}`;
+    const currentSelectedPaddedDate = `${year}/${str_pad(month + 1)}/${str_pad(
       day
     )}`;
     const currentSelectedDOMCell = document.querySelector(
