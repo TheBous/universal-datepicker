@@ -154,11 +154,10 @@ class CalendarInitiator {
     );
     // selected dates
     const paddedDay = str_pad(day);
+    const paddedMonth = str_pad(month + 1);
     const currentSelectedJSDate = new Date(year, month, paddedDay);
-    const currentSelectedFormattedDate = `${year}/${month + 1}/${day}`;
-    const currentSelectedPaddedDate = `${year}/${str_pad(month + 1)}/${str_pad(
-      day
-    )}`;
+    const currentSelectedPaddedDate = `${year}/${paddedMonth}/${paddedDay}`;
+    const currentSelectedFormattedDate = `${year}-${paddedMonth}-${paddedDay}`;
     const currentSelectedDOMCell = document.querySelector(
       `[data-date="${currentSelectedPaddedDate}"]`
     );
@@ -168,7 +167,7 @@ class CalendarInitiator {
       this.setCheckin(
         event,
         currentSelectedJSDate,
-        currentSelectedPaddedDate,
+        currentSelectedFormattedDate,
         currentSelectedDOMCell,
         oldSelectedCheckin
       );
@@ -181,7 +180,7 @@ class CalendarInitiator {
       this.setCheckin(
         event,
         currentSelectedJSDate,
-        currentSelectedPaddedDate,
+        currentSelectedFormattedDate,
         currentSelectedDOMCell,
         oldSelectedCheckin
       );
@@ -189,7 +188,7 @@ class CalendarInitiator {
       this.setCheckout(
         event,
         currentSelectedJSDate,
-        currentSelectedPaddedDate,
+        currentSelectedFormattedDate,
         currentSelectedDOMCell,
         oldSelectedCheckout
       );

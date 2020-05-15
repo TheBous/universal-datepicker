@@ -116,7 +116,7 @@ const calendar = new UniversalCalendar({configs here})
 <div id="calendar"></div>
 ```
 
-### `4: Horizontal arrows to switch months are <i></i>. You need to pass to application a class to this icons with leftArrowClassname and rightArrowClassname`
+### `4: Horizontal arrows to switch months are <i></i>. You need to pass to application a class to these icons with leftArrowClassname and rightArrowClassname`
 
 ```sh
 {
