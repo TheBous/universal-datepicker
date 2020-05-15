@@ -24,10 +24,6 @@ export const isBefore = ({ year, month, day }, date2) => {
   return date1 < date2;
 };
 
-export const areDatesEquals = (date1, date2) => {
-  return date1.getTime() === date2.getTime();
-};
-
 export const addDays = (date, days) => {
   const newDate = new Date(date);
   const updateDate = newDate.setDate(newDate.getDate() + days);

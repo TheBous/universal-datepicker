@@ -3,6 +3,7 @@ import {
   getDaysInMonth,
   dateInRange,
   isBefore,
+  str_pad,
 } from "../helpers";
 import { renderLetterWeekdays } from "./letterWeekdays";
 
@@ -20,6 +21,7 @@ export const renderCellWeekdays = ({
 }) => {
   // month in right orthodox index (1-12) to print month to UI
   const UIMonth = month + 1;
+  const paddedMonth = str_pad(UIMonth);
   const firstDayOfMonthInWeek = getDayInWeek(month, year);
   const daysInMonth = getDaysInMonth(month, year);
   let renderedDay = 1;
@@ -74,7 +76,10 @@ export const renderCellWeekdays = ({
         // build a new js date with current cell(day)/month/year
         const currentCellDate = new Date(year, month, renderedDay);
 
-        cell.setAttribute("data-date", `${year}-${UIMonth}-${renderedDay}`);
+        cell.setAttribute(
+          "data-date",
+          `${year}-${paddedMonth}-${str_pad(renderedDay)}`
+        );
         if (isBefore({ year, month, day: renderedDay }, today)) {
           cell.classList.add("calendar__cell--past");
         }

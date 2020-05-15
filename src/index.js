@@ -41,7 +41,7 @@ class CalendarInitiator {
     // Array of months label in current language
     monthsLabels = letterMonths,
     // checkin,checkout in javascript date format
-    checkin = new Date(),
+    checkin = new Date("2020/05/09"),
     checkout = new Date("2020/05/20"),
     // calendar orientation : vertical with scroll or horizontal with arrows (horizontal|vertical)
     orientation = "horizontal",
@@ -125,9 +125,8 @@ class CalendarInitiator {
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkin");
     }
-    if (!!cell && cell instanceof Element) {
+    if (!!cell && cell instanceof Element)
       cell.classList.add("calendar__cell--checkin");
-    }
   };
 
   setCheckout = (event, checkout, paddedDate, cell, oldSelectedCell) => {
@@ -154,13 +153,14 @@ class CalendarInitiator {
       ".calendar__cell--checkout"
     );
     // selected dates
-    const currentSelectedJSDate = new Date(year, month, day);
+    const paddedDay = str_pad(day);
+    const currentSelectedJSDate = new Date(year, month, paddedDay);
     const currentSelectedFormattedDate = `${year}-${month + 1}-${day}`;
     const currentSelectedPaddedDate = `${year}-${str_pad(month + 1)}-${str_pad(
       day
     )}`;
     const currentSelectedDOMCell = document.querySelector(
-      `[data-date="${currentSelectedFormattedDate}"]`
+      `[data-date="${currentSelectedPaddedDate}"]`
     );
 
     if (currentSelectedJSDate <= this.#checkin) {
@@ -202,7 +202,7 @@ class CalendarInitiator {
       cell.classList.remove("calendar__cell--checkin--mono");
       //cell.classList.remove("calendar__cell--disabled");
 
-      const cellDate = new Date(cell.getAttribute("data-date"));
+      const cellDate = new Date(`${cell.getAttribute("data-date")} 00:00`);
 
       // if dates in range
       if (dateInRange(this.#checkin, this.#checkout, cellDate)) {
@@ -226,7 +226,7 @@ class CalendarInitiator {
     const currentYear = this.#today.getFullYear();
 
     // informations to initialize the right calendar view
-    const initialDay = this.#initialDate.getDate();
+    const initialDay = str_pad(this.#initialDate.getDate());
     const initialMonth = this.#initialDate.getMonth();
     const initialYear = this.#initialDate.getFullYear();
 
