@@ -202,7 +202,8 @@ class CalendarInitiator {
       cell.classList.remove("calendar__cell--checkin--mono");
       //cell.classList.remove("calendar__cell--disabled");
 
-      const cellDate = new Date(`${cell.getAttribute("data-date")} 00:00`);
+      const cellDate = new Date(`${cell.getAttribute("data-date")}`);
+      cellDate.setHours(0, 0, 0, 0);
 
       // if dates in range
       if (dateInRange(this.#checkin, this.#checkout, cellDate)) {
