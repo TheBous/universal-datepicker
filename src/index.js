@@ -280,7 +280,7 @@ class CalendarInitiator {
         : this.#verticalPages;
 
     for (let i = 0; i < loopSize; i++) {
-      const initialDate = new Date(initialYear, initialMonth, initialDay);
+      const initialDate = new Date(initialYear, initialMonth, 1);
       initialDate.setMonth(initialDate.getMonth() + i);
 
       renderCalendarBlocks({
