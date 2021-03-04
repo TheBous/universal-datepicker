@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="161px" height="169px" viewBox="0 0 161 169" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Calendar</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(0.000000, -209.000000)">
+            <g id="Calendar" transform="translate(0.000000, 210.000000)">
+                <g>
+                    <rect id="Rectangle" fill="#2CA6A4" x="0" y="8" width="160" height="160" rx="8"></rect>
+                    <rect id="Rectangle" fill="#79BCB8" x="10" y="42" width="40" height="40" rx="8"></rect>
+                    <rect id="Rectangle-Copy-6" fill="#79BCB8" x="10" y="102" width="40" height="40" rx="8"></rect>
+                    <rect id="Rectangle-Copy-4" fill="#79BCB8" x="60" y="42" width="40" height="40" rx="8"></rect>
+                    <rect id="Rectangle-Copy-7" fill="#79BCB8" x="60" y="102" width="40" height="40" rx="8"></rect>
+                    <rect id="Rectangle-Copy-5" fill="#79BCB8" x="110" y="42" width="40" height="40" rx="8"></rect>
+                    <rect id="Rectangle-Copy-8" fill="#79BCB8" x="110" y="102" width="40" height="40" rx="8"></rect>
+                    <rect id="Rectangle" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero" opacity="0.940473489" stroke-linejoin="bevel" x="0.5" y="-0.5" width="159" height="27.49375"></rect>
+                </g>
+                <g id="Pencil" transform="translate(138.500000, 134.000000) rotate(30.000000) translate(-138.500000, -134.000000) translate(131.000000, 103.000000)">
+                    <polygon id="Triangle" fill="#7A7777" transform="translate(7.500000, 54.500000) rotate(180.000000) translate(-7.500000, -54.500000) " points="7.5 47 15 62 0 62"></polygon>
+                    <rect id="Rectangle" fill="#E45F5F" x="0" y="0" width="15" height="15" rx="7.5"></rect>
+                    <rect id="Rectangle" fill="#E9B872" x="0" y="10" width="15" height="37"></rect>
+                    <polyline id="Line" stroke="#F79F20" stroke-linecap="square" points="4.5 10.280303 4.5 28.7831821 4.5 46.719697"></polyline>
+                    <line x1="10.5" y1="10.280303" x2="10.5" y2="46.719697" id="Line-2" stroke="#F79F20" stroke-linecap="square"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

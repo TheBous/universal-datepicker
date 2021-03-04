@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/TheBous">
-    <img src="images/datepicker.png" alt="Logo" width="80" height="80">
+    <img src="images/datepicker.svg" alt="Logo" width="120" height="120">
   </a>
   <h3 align="center">Pure 8kb Vanilla Javascript plug and play datepicker</h3>
   <p align="center">
