@@ -35,6 +35,7 @@ export const renderCalendarBlocks = ({
     defaultCheckout,
     onCellClick,
     maxCheckin,
+    showTodayDate,
   });
 
   container.appendChild(tableWrapper);

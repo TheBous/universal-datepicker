@@ -95,6 +95,8 @@ yarn start
 
 15. **_`rightArrowClassname`_**: Class to add some icon style to right arrow
 
+16. **_`showTodayDate`_**: Boolean to show a custom UI for today date cell
+
 ### Installation
 
 ### `1: Install NPM packages`
@@ -145,6 +147,7 @@ In order to add some style customization, you need to override these CSS classes
 - **_`calendar__cell--checkout`_**: Selected checkout in calendar
 - **_`calendar__cell--range`_**: Date between checkin and checkout
 - **_`calendar__cell--today`_**: Today date
+- **_`calendar__cell--today-highlighted`_**: Rule to custom today highlighting date
 
 <!-- CONTACT -->
 
