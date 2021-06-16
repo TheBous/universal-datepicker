@@ -18,6 +18,7 @@ export const renderCellWeekdays = ({
   defaultCheckout,
   onCellClick,
   maxCheckin,
+  showTodayDate,
 }) => {
   // month in right orthodox index (1-12) to print month to UI
   const UIMonth = month + 1;
@@ -75,11 +76,18 @@ export const renderCellWeekdays = ({
 
         // build a new js date with current cell(day)/month/year
         const currentCellDate = new Date(year, month, renderedDay);
+        const isToday =
+          renderedDay === currentDayInMonth &&
+          month === today.getMonth() &&
+          year === today.getFullYear();
 
         cell.setAttribute(
           "data-date",
           `${year}/${paddedMonth}/${str_pad(renderedDay)}`
         );
+        if (isToday && showTodayDate) {
+          cell.classList.add("calendar__cell--today-highlighted");
+        }
         if (isBefore({ year, month, day: renderedDay }, today)) {
           cell.classList.add("calendar__cell--past");
         }
@@ -107,11 +115,7 @@ export const renderCellWeekdays = ({
         cellText = document.createTextNode(renderedDay);
 
         // today
-        if (
-          renderedDay === currentDayInMonth &&
-          month === today.getMonth() &&
-          year === today.getFullYear()
-        ) {
+        if (isToday) {
           cell.classList.add("calendar__cell--today");
         }
         text.appendChild(cellText);

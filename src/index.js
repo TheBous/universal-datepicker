@@ -28,6 +28,7 @@ class CalendarInitiator {
   #maxCheckin;
   #leftArrowClassname;
   #rightArrowClassname;
+  #showTodayDate;
 
   constructor({
     // DOM element to which the calendar should be attached
@@ -65,6 +66,8 @@ class CalendarInitiator {
     leftArrowClassname = "left-arrow-icon",
     // Class to add some icon style to right arrow
     rightArrowClassname = "right-arrow-icon",
+    // Boolean to show a custom UI for today date cell
+    showTodayDate = false,
   } = {}) {
     this.#DOMElement = DOMElement;
     this.#today = formatToday(today);
@@ -83,6 +86,7 @@ class CalendarInitiator {
     this.#maxCheckin = addDays(new Date(), maxCheckin);
     this.#leftArrowClassname = leftArrowClassname;
     this.#rightArrowClassname = rightArrowClassname;
+    this.#showTodayDate = showTodayDate;
 
     process.env.NODE_ENV !== "production" && this.renderCalendar();
   }
@@ -301,6 +305,7 @@ class CalendarInitiator {
         onCellClick: this.onCellClick,
         orientation: this.#orientation,
         maxCheckin: this.#maxCheckin,
+        showTodayDate: this.#showTodayDate,
       });
     }
   };
