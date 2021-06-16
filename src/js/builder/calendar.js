@@ -14,6 +14,7 @@ export const renderCalendarBlocks = ({
   monthsLabels,
   onCellClick,
   maxCheckin,
+  showTodayDate,
 }) => {
   const tableWrapper = document.createElement("div");
   tableWrapper.classList.add("table-wrapper");
