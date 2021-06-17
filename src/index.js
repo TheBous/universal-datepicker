@@ -138,7 +138,8 @@ class CalendarInitiator {
     if (!!cell && cell instanceof Element) {
       cell.classList.add("calendar__cell--checkin");
       if (!!this.#customCheckinElement) {
-        const decorator = document.createElement("span");
+        const decorator = document.createElement("div");
+        decorator.classList.add("calendar__cell__decorator");
         decorator.innerHTML = this.#customCheckinElement;
         cell.appendChild(decorator);
       }
@@ -159,7 +160,8 @@ class CalendarInitiator {
     if (!!cell && cell instanceof Element) {
       cell.classList.add("calendar__cell--checkout");
       if (!!this.#customCheckoutElement) {
-        const decorator = document.createElement("span");
+        const decorator = document.createElement("div");
+        decorator.classList.add("calendar__cell__decorator");
         decorator.innerHTML = this.#customCheckoutElement;
         cell.appendChild(decorator);
       }
