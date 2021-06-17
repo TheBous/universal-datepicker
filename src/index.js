@@ -29,6 +29,8 @@ class CalendarInitiator {
   #leftArrowClassname;
   #rightArrowClassname;
   #showTodayDate;
+  #customCheckinElement;
+  #customCheckoutElement;
 
   constructor({
     // DOM element to which the calendar should be attached
@@ -89,6 +91,8 @@ class CalendarInitiator {
     this.#leftArrowClassname = leftArrowClassname;
     this.#rightArrowClassname = rightArrowClassname;
     this.#showTodayDate = showTodayDate;
+    this.#customCheckinElement = customCheckinElement;
+    this.#customCheckoutElement = customCheckoutElement;
 
     process.env.NODE_ENV !== "production" && this.renderCalendar();
   }
@@ -131,8 +135,14 @@ class CalendarInitiator {
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkin");
     }
-    if (!!cell && cell instanceof Element)
+    if (!!cell && cell instanceof Element) {
       cell.classList.add("calendar__cell--checkin");
+      if (!!this.#customCheckinElement) {
+        const decorator = document.createElement("span");
+        decorator.innerHTML = this.#customCheckinElement;
+        cell.appendChild(decorator);
+      }
+    }
   };
 
   setCheckout = (event, checkout, paddedDate, cell, oldSelectedCell) => {
@@ -146,8 +156,14 @@ class CalendarInitiator {
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
       oldSelectedCell.classList.remove("calendar__cell--checkout");
     }
-    if (!!cell && cell instanceof Element)
+    if (!!cell && cell instanceof Element) {
       cell.classList.add("calendar__cell--checkout");
+      if (!!this.#customCheckoutElement) {
+        const decorator = document.createElement("span");
+        decorator.innerHTML = this.#customCheckoutElement;
+        cell.appendChild(decorator);
+      }
+    }
   };
 
   updateCalendar = (event, year, month, day) => {
