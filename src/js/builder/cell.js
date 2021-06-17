@@ -135,11 +135,12 @@ export const renderCellWeekdays = ({
         text.appendChild(cellText);
         cell.appendChild(text);
         row.appendChild(cell);
+        const curDay = renderedDay;
         if (
           !cell.classList.contains("calendar__cell--past")
           //!cell.classList.contains("calendar__cell--disabled")
         )
-          cell.onclick = (e) => onCellClick(e, year, month);
+          cell.onclick = (e) => onCellClick(e, curDay, year, month);
         renderedDay++;
       }
     }

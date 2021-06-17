@@ -117,12 +117,8 @@ class CalendarInitiator {
   };
 
   // This month start from 0
-  onCellClick = (event, year, month) => {
-    // const { textContent: day } = event.target;
-    const { textContent: day } = event.currentTarget;
-
+  onCellClick = (event, day, year, month) =>
     this.updateCalendar(event, year, month, day);
-  };
 
   setCheckin = (event, checkin, paddedDate, cell, oldSelectedCell) => {
     this.#checkin = checkin;
