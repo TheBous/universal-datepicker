@@ -118,7 +118,8 @@ class CalendarInitiator {
 
   // This month start from 0
   onCellClick = (event, year, month) => {
-    const { textContent: day } = event.target;
+    // const { textContent: day } = event.target;
+    const { textContent: day } = event.currentTarget;
 
     this.updateCalendar(event, year, month, day);
   };
