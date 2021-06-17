@@ -334,6 +334,8 @@ class CalendarInitiator {
         orientation: this.#orientation,
         maxCheckin: this.#maxCheckin,
         showTodayDate: this.#showTodayDate,
+        customCheckinElement: this.#customCheckinElement,
+        customCheckoutElement: this.#customCheckoutElement,
       });
     }
   };

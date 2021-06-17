@@ -19,6 +19,8 @@ export const renderCellWeekdays = ({
   onCellClick,
   maxCheckin,
   showTodayDate,
+  customCheckinElement,
+  customCheckoutElement,
 }) => {
   // month in right orthodox index (1-12) to print month to UI
   const UIMonth = month + 1;
@@ -98,12 +100,24 @@ export const renderCellWeekdays = ({
           unpackedCheckin.year === year
         ) {
           cell.classList.add("calendar__cell--checkin");
+          if (!!customCheckinElement) {
+            const decorator = document.createElement("div");
+            decorator.classList.add("calendar__cell__decorator");
+            decorator.innerHTML = customCheckinElement;
+            cell.appendChild(decorator);
+          }
         } else if (
           unpackedCheckout.day === renderedDay &&
           unpackedCheckout.month === month &&
           unpackedCheckout.year === year
         ) {
           cell.classList.add("calendar__cell--checkout");
+          if (!!customCheckoutElement) {
+            const decorator = document.createElement("div");
+            decorator.classList.add("calendar__cell__decorator");
+            decorator.innerHTML = customCheckoutElement;
+            cell.appendChild(decorator);
+          }
         } else if (dateInRange(checkin, checkout, currentCellDate)) {
           cell.classList.add("calendar__cell--range");
         } else if (currentCellDate > maxCheckin) {

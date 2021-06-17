@@ -15,6 +15,8 @@ export const renderCalendarBlocks = ({
   onCellClick,
   maxCheckin,
   showTodayDate,
+  customCheckinElement,
+  customCheckoutElement,
 }) => {
   const tableWrapper = document.createElement("div");
   tableWrapper.classList.add("table-wrapper");
@@ -37,6 +39,8 @@ export const renderCalendarBlocks = ({
     onCellClick,
     maxCheckin,
     showTodayDate,
+    customCheckinElement,
+    customCheckoutElement,
   });
 
   container.appendChild(tableWrapper);
