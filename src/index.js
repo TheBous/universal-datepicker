@@ -68,6 +68,8 @@ class CalendarInitiator {
     rightArrowClassname = "right-arrow-icon",
     // Boolean to show a custom UI for today date cell
     showTodayDate = false,
+    customCheckinElement = null,
+    customCheckoutElement = null,
   } = {}) {
     this.#DOMElement = DOMElement;
     this.#today = formatToday(today);
