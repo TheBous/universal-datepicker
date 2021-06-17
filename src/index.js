@@ -70,8 +70,8 @@ class CalendarInitiator {
     rightArrowClassname = "right-arrow-icon",
     // Boolean to show a custom UI for today date cell
     showTodayDate = false,
-    customCheckinElement = null,
-    customCheckoutElement = null,
+    customCheckinElement = `<div>ciao</div>`,
+    customCheckoutElement = `<div>ciao</div>`,
   } = {}) {
     this.#DOMElement = DOMElement;
     this.#today = formatToday(today);
@@ -133,6 +133,10 @@ class CalendarInitiator {
         checkout: this.#checkout,
       });
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
+      const decoratorToRemove = document.querySelector(
+        ".calendar__cell--checkin > .calendar__cell__decorator"
+      );
+      if (decoratorToRemove) decoratorToRemove.remove();
       oldSelectedCell.classList.remove("calendar__cell--checkin");
     }
     if (!!cell && cell instanceof Element) {
@@ -155,6 +159,10 @@ class CalendarInitiator {
         checkin: this.#checkin,
       });
     if (!!oldSelectedCell && oldSelectedCell instanceof Element) {
+      const decoratorToRemove = document.querySelector(
+        ".calendar__cell--checkout > .calendar__cell__decorator"
+      );
+      if (decoratorToRemove) decoratorToRemove.remove();
       oldSelectedCell.classList.remove("calendar__cell--checkout");
     }
     if (!!cell && cell instanceof Element) {
