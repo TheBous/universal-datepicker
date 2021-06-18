@@ -97,6 +97,10 @@ yarn start
 
 16. **_`showTodayDate`_**: Boolean to show a custom UI for today date cell
 
+17. **_`customCheckinElement`_**: DOM element to customize checkin calendar cell (ex <img src="example_checkin.svg"/>) customizable with position relative-absolute
+
+18. **_`customCheckoutElement`_**: DOM element to customize checkout calendar cell (ex <img src="example_checkout.svg"/>) customizable with position relative-absolute
+
 ### Installation
 
 ### `1: Install NPM packages`
@@ -148,6 +152,7 @@ In order to add some style customization, you need to override these CSS classes
 - **_`calendar__cell--range`_**: Date between checkin and checkout
 - **_`calendar__cell--today`_**: Today date
 - **_`calendar__cell--today-highlighted`_**: Rule to custom today highlighting date
+- **_`calendar__cell__decorator`_**: Decorator for checkin and checkout cells
 
 <!-- CONTACT -->
 
