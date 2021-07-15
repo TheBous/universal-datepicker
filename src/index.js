@@ -191,6 +191,9 @@ class CalendarInitiator {
       `[data-date="${currentSelectedPaddedDate}"]`
     );
 
+    if (!!this.#checkin) this.#checkin.setHours(0, 0, 0, 0);
+    if (!!this.#checkout) this.#checkout.setHours(0, 0, 0, 0);
+
     if (currentSelectedJSDate <= this.#checkin) {
       this.setCheckout(event, null, null, null, oldSelectedCheckout);
       this.setCheckin(
