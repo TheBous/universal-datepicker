@@ -106,6 +106,11 @@ class CalendarInitiator {
     );
   };
 
+  userCanNext = () =>
+    this.#initialDate.getFullYear() <= this.#today.getFullYear() ||
+    (this.#initialDate.getMonth() < this.#today.getMonth() &&
+      this.#initialDate.getFullYear() <= this.#today.getFullYear() + 1);
+
   removeCalendar = () => {
     const calendar = document.getElementById("calendar__wrapper");
     if (!!calendar) calendar.remove();
@@ -121,10 +126,12 @@ class CalendarInitiator {
   };
 
   onNext = (e) => {
-    this.#onNext(e);
-    this.removeCalendar();
-    this.#initialDate.setMonth(this.#initialDate.getMonth() + 1);
-    this.renderCalendar();
+    if (this.userCanNext()) {
+      this.#onNext(e);
+      this.removeCalendar();
+      this.#initialDate.setMonth(this.#initialDate.getMonth() + 1);
+      this.renderCalendar();
+    }
   };
 
   // This month start from 0
@@ -286,26 +293,30 @@ class CalendarInitiator {
       calendarWrapper.appendChild(arrowsContainer);
 
       const leftArrow = document.createElement("span");
-      const leftIcon = document.createElement("i");
-      console.error(!this.userCanPrev());
+      const leftIcon = document.createElement("div");
       if (!!this.#leftArrowClassname) {
         leftIcon.classList.add(this.#leftArrowClassname);
       }
-      if (!this.userCanPrev()) {
-        leftIcon.classList.add("--disabled");
-      }
+
       leftArrow.onclick = (e) => this.onPrev(e);
       leftArrow.classList.add("calendar__arrow");
       leftArrow.classList.add("calendar__arrow--left");
+      if (!this.userCanPrev()) {
+        leftArrow.classList.add("--disabled");
+      }
       leftArrow.appendChild(leftIcon);
 
       const rightArrow = document.createElement("span");
-      const rightIcon = document.createElement("i");
+      const rightIcon = document.createElement("div");
       if (!!this.#rightArrowClassname)
         rightIcon.classList.add(this.#rightArrowClassname);
+
       rightArrow.onclick = (e) => this.onNext(e);
       rightArrow.classList.add("calendar__arrow");
       rightArrow.classList.add("calendar__arrow--right");
+      if (!this.userCanNext()) {
+        leftArrow.classList.add("--disabled");
+      }
       rightArrow.appendChild(rightIcon);
 
       arrowsContainer.appendChild(leftArrow);

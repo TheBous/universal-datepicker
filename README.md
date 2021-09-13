@@ -154,6 +154,12 @@ In order to add some style customization, you need to override these CSS classes
 - **_`calendar__cell--today-highlighted`_**: Rule to custom today highlighting date
 - **_`calendar__cell__decorator`_**: Decorator for checkin and checkout cells
 
+<!-- LIMITS -->
+
+## Limits
+
+With minor 1.2.0 a user can select a date up to 1 year from now.
+
 <!-- CONTACT -->
 
 ## Contact
