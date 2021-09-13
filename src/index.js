@@ -97,16 +97,27 @@ class CalendarInitiator {
     process.env.NODE_ENV !== "production" && this.renderCalendar();
   }
 
+  userCanPrev = () => {
+    const updatedMonth = this.#initialDate.getMonth() - 1;
+    const updatedYear = this.#initialDate.getFullYear();
+    return (
+      updatedMonth >= this.#today.getMonth() ||
+      updatedYear > this.#today.getFullYear()
+    );
+  };
+
   removeCalendar = () => {
     const calendar = document.getElementById("calendar__wrapper");
     if (!!calendar) calendar.remove();
   };
 
   onPrev = (e) => {
-    this.#onPrev(e);
-    this.removeCalendar();
-    this.#initialDate.setMonth(this.#initialDate.getMonth() - 1);
-    this.renderCalendar();
+    if (this.userCanPrev()) {
+      this.#onPrev(e);
+      this.removeCalendar();
+      this.#initialDate.setMonth(this.#initialDate.getMonth() - 1);
+      this.renderCalendar();
+    }
   };
 
   onNext = (e) => {
@@ -276,8 +287,13 @@ class CalendarInitiator {
 
       const leftArrow = document.createElement("span");
       const leftIcon = document.createElement("i");
-      if (!!this.#leftArrowClassname)
+      console.error(!this.userCanPrev());
+      if (!!this.#leftArrowClassname) {
         leftIcon.classList.add(this.#leftArrowClassname);
+      }
+      if (!this.userCanPrev()) {
+        leftIcon.classList.add("--disabled");
+      }
       leftArrow.onclick = (e) => this.onPrev(e);
       leftArrow.classList.add("calendar__arrow");
       leftArrow.classList.add("calendar__arrow--left");
