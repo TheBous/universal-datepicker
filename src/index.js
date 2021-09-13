@@ -293,7 +293,7 @@ class CalendarInitiator {
       calendarWrapper.appendChild(arrowsContainer);
 
       const leftArrow = document.createElement("span");
-      const leftIcon = document.createElement("div");
+      const leftIcon = document.createElement("i");
       if (!!this.#leftArrowClassname) {
         leftIcon.classList.add(this.#leftArrowClassname);
       }
@@ -307,7 +307,7 @@ class CalendarInitiator {
       leftArrow.appendChild(leftIcon);
 
       const rightArrow = document.createElement("span");
-      const rightIcon = document.createElement("div");
+      const rightIcon = document.createElement("i");
       if (!!this.#rightArrowClassname)
         rightIcon.classList.add(this.#rightArrowClassname);
 
@@ -315,7 +315,7 @@ class CalendarInitiator {
       rightArrow.classList.add("calendar__arrow");
       rightArrow.classList.add("calendar__arrow--right");
       if (!this.userCanNext()) {
-        leftArrow.classList.add("--disabled");
+        rightArrow.classList.add("--disabled");
       }
       rightArrow.appendChild(rightIcon);
 
