@@ -44,10 +44,10 @@ class CalendarInitiator {
     // Array of months label in current language
     monthsLabels = letterMonths,
     // checkin,checkout in javascript date format
-    checkin = new Date("2020/05/09"),
-    checkout = new Date("2020/05/20"),
+    checkin = new Date("2020/11/09"),
+    checkout = new Date("2020/11/20"),
     // calendar orientation : vertical with scroll or horizontal with arrows (horizontal|vertical)
-    orientation = "horizontal",
+    orientation = "vertical",
     // number of calendar page per view in horizontal view
     horizontalPages = 2,
     // number of calendar page per view in vertical view
@@ -364,6 +364,15 @@ class CalendarInitiator {
         customCheckinElement: this.#customCheckinElement,
         customCheckoutElement: this.#customCheckoutElement,
       });
+    }
+
+    const checkinMonth = str_pad(this.#checkin.getMonth() + 1);
+    const queryLabel = `${checkinMonth}${initialYear}`;
+    const elToScroll = document.querySelector(
+      `.calendar__header--${queryLabel}`
+    );
+    if (!!elToScroll && typeof elToScroll.scrollIntoView === "function") {
+      elToScroll.scrollIntoView({ behavior: "smooth" });
     }
   };
 }
