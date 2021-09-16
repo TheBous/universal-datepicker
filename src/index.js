@@ -366,16 +366,15 @@ class CalendarInitiator {
       });
     }
 
-    const checkinMonth = str_pad(this.#checkin.getMonth() + 1);
-    const checkinYear = this.#checkin.getFullYear();
-    const queryLabel = `${checkinMonth}${checkinYear}`;
-    const elToScroll = document.querySelector(
-      `.calendar__header--${queryLabel}`
-    );
-    console.error("prehere", elToScroll, queryLabel);
-    if (!!elToScroll && typeof elToScroll.scrollIntoView === "function") {
-      console.error("here");
-      elToScroll.scrollIntoView({ behavior: "smooth" });
+    if (this.#orientation === "vertical") {
+      const checkinMonth = str_pad(this.#checkin.getMonth() + 1);
+      const checkinYear = this.#checkin.getFullYear();
+      const queryLabel = `${checkinMonth}${checkinYear}`;
+      const elToScroll = document.querySelector(
+        `.calendar__header--${queryLabel}`
+      );
+      if (!!elToScroll && typeof elToScroll.scrollIntoView === "function")
+        elToScroll.scrollIntoView({ behavior: "smooth" });
     }
   };
 }
